@@ -14,6 +14,7 @@
     text-align: center;
     background-color: black;
     color: #ffffff;
+    border-radius: 10px;
   }
   
   .login-form {
@@ -43,7 +44,7 @@
     background-color: #dc1f1f;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 100px;
     cursor: pointer;
     font-size: 16px;
   }

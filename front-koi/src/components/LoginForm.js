@@ -1,16 +1,42 @@
 import React, { useState } from 'react';
 import '../styles/LoginForm.css';
+import { useNavigate } from 'react-router-dom';
 
 
-const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const LoginForm = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '', 
+    password: '',
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // Aquí puedes agregar lógica para manejar la autenticación
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en el registro');
+      }
+      const data = await response.json();
+      console.log('Login exitoso:', data);
+      setTimeout(() => {
+        navigate('/profile');
+      }, 1);
+    } catch (error) {
+      console.error('Error al ingresar:', error);
+    }
   };
 
   return (
@@ -21,9 +47,9 @@ const LoginForm = () => {
           <label htmlFor="email">CORREO ELECTRÓNICO</label>
           <input 
             type="email" 
-            id="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            name="email" 
+            value={formData.email} 
+            onChange={handleChange} 
             required 
           />
         </div>
@@ -31,9 +57,9 @@ const LoginForm = () => {
           <label htmlFor="password">CONTRASEÑA</label>
           <input 
             type="password" 
-            id="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
+            name="password" 
+            value={formData.password} 
+            onChange={handleChange} 
             required 
           />
         </div>

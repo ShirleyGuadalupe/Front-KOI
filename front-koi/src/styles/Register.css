@@ -1,0 +1,81 @@
+.register-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
+    background-color: #f0f0f0;
+    text-align: center;
+    border-radius: 20px;
+  }
+
+  .register-container .popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #4caf50; /* Verde para éxito */
+    color: white;
+    border-radius: 5px;
+    transition: opacity 0.5s;
+  }
+
+  .register-container .popuperror {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #f44336; /* Rojo para errores */
+    color: white;
+    border-radius: 5px;
+    transition: opacity 0.5s;
+  }
+  
+  .register-container h2 {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 10px;
+  }
+  
+  .register-container p {
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  .register-container p a {
+    color: red;
+    text-decoration: none;
+  }
+  
+  .register-container .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .register-container .form-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .register-container input {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .btn-register {
+    padding: 15px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 100px;
+  }
+  
+  .btn-register:hover {
+    background-color: gray;
+    color: black;
+  }
