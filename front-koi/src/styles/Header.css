@@ -1,21 +1,81 @@
+.header-container {
+  margin: 0px 0px 40px;
+  padding: 20px;
+  background-color: #000000; /* Fondo negro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 ul.horizontal-list {
-    list-style: none;
-    text-align: center;
-  }
+  list-style: none; /* Sin viñetas */
+  text-align: center; /* Centrado del contenido */
+  padding: 0; /* Sin padding */
+  margin: 0; /* Sin margen */
+}
 
 ul.horizontal-list li {
-    display: inline-block;
-    padding: 0px 30px;
-    text-align: center;
-  }
-.header-container {
-    margin: 0px 0px 40px;
-    padding: 20px;
-    background-color: #000000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  display: inline-block; /* Elementos en línea */
+  padding: 0px 30px; /* Espaciado horizontal */
+  text-align: center; /* Centrado del texto */
+  position: relative; /* Necesario para el dropdown */
+}
 
 a.letters {
-  color: white;
-  text-decoration: none;
-  }
+  color: white; /* Color del texto */
+  text-decoration: none; /* Sin subrayado */
+}
+
+a.letters:hover {
+  color: #007bff; /* Color al pasar el mouse */
+}
+
+.dropdown-container {
+  position: absolute; /* Hace que el dropdown flote */
+  top: 100%; /* Justo debajo del menú principal */
+  left: 0; /* Alineado a la izquierda */
+  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+}
+
+.dropdown {
+  display: block; /* Muestra el menú */
+  background: white; /* Fondo blanco */
+  border: 1px solid #ccc; /* Borde del menú */
+  padding: 10px 0px; /* Espaciado interno */
+}
+
+.dropdown li {
+  padding: 5px 15px; /* Espaciado interno para los dropdowns */
+  position: relative; /* Necesario para el borde divisorio */
+  display: block; /* Hace que cada li ocupe el ancho completo */
+  width: 100%; /* Asegura que los li ocupen todo el ancho del contenedor */
+}
+
+.dropdown li:hover {
+  background-color: #f1f1f1; /* Fondo al pasar el mouse sobre un elemento */
+}
+
+/* Línea divisoria */
+.dropdown li + li {
+  border-top: 1px solid #ccc; /* Línea divisoria entre elementos */
+}
+
+.dropdown-sub {
+  display: block; /* Muestra las subcolecciones */
+  position: absolute; /* Posiciona las subcolecciones */
+  left: 100%; /* Alinea las subcolecciones a la derecha */
+  top: 0; /* Alinea verticalmente */
+  background: white; /* Fondo blanco para las subcolecciones */
+  border: 1px solid #ccc; /* Borde de las subcolecciones */
+}
+
+.dropdown-sub li {
+  white-space: nowrap; /* Previene que el texto se rompa */
+  display: block; /* Hace que cada li ocupe el ancho completo */
+  padding: 5px;
+}
+
+/* Línea divisoria para subcolecciones */
+.dropdown-sub li + li {
+  border-top: 1px solid #ccc; /* Línea divisoria entre subcolecciones */
+}
+
+
