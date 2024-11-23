@@ -18,16 +18,16 @@ const Header = () => {
         <nav className="main-nav">
         <ul class="horizontal-list">
             <li>
-                <a className='letters' href="/login">LANZAMIENTO</a>
+                <a className='letters' href="/lanzamiento">LANZAMIENTO</a>
             </li>
               <li>
-                <a className='letters' href="/login">COLECCIONES</a>
+                <a className='letters' href="/colecciones">COLECCIONES</a>
               </li>
               <li>
-                <a className='letters' href="/login">PERSONALIZACIÓN</a>
+                <a className='letters' href="/personalizacion">PERSONALIZACIÓN</a>
               </li>
               <li>
-              <a className='letters' href="/login">OFERTAS</a>
+              <a className='letters' href="/ofertas">OFERTAS</a>
               </li>
             </ul>
         </nav>  

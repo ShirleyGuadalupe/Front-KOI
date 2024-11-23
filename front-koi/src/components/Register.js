@@ -31,6 +31,12 @@ const Register = () => {
       setMessage('');
       return;
     }
+
+    if (formData.email !== formData.confirmemail) {
+      setError('Las contraseñas no coinciden');
+      setMessage('');
+      return;
+    }
     
     try {
       const response = await fetch('http://localhost:3001/api/auth/register', {
