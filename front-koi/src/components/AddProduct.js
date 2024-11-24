@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const AddProductForm = () => {
   const navigate = useNavigate();
   const [product, setProduct] = useState({
-    name: "",
-    image: null,
-    subColeccion: 'lanzamiento',
+    nombre: "",
+    lanzamiento: false,
+    oferta: false,
+    subColeccionId: 1,
   });
-
+  const [subcolecciones, setSubcolecciones] = useState([]);
+  
+  useEffect(() => {
+    fetch('https://api-koi-production.up.railway.app/api/sub-colecciones')
+      .then(response => response.json())
+      .then(data => {
+        setSubcolecciones(data); 
+      })
+      .catch(error => console.error('Error al obtener subcolecciones:', error));
+  }, []);
   const handleSubmit = async (e) => {
-    const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
     e.preventDefault();
     try {
       const response = await fetch('https://api-koi-production.up.railway.app/api/camisetas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, 
-          
+          'Authorization': `Bearer ${token}`,
+
         },
         body: JSON.stringify(product),
       });
@@ -34,7 +44,7 @@ const AddProductForm = () => {
       console.error('Error al añadir:', error);
     }
   };
-  
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -45,7 +55,7 @@ const AddProductForm = () => {
     <div style={styles.container}>
       <h1 style={styles.title}>Añadir Producto</h1>
       <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.imageUpload}>
+        {/* <div style={styles.imageUpload}>
           <label style={styles.imageLabel}>
             {product.image ? (
               <img src={product.image} alt="Preview" style={styles.imagePreview} />
@@ -62,16 +72,54 @@ const AddProductForm = () => {
               style={styles.fileInput}
             />
           </label>
-        </div>
+        </div> */}
 
         <input
           type="text"
           placeholder="Nombre del producto"
-          value={product.name}
-          onChange={(e) => setProduct({ ...product, name: e.target.value })}
+          value={product.nombre}
+          onChange={(e) => setProduct({ ...product, nombre: e.target.value })}
           style={styles.input}
         />
 
+
+        <div style={styles.toggleGroup}>
+          <label style={styles.toggleLabel}>
+            Lanzamiento
+            <input
+              type="checkbox"
+              checked={product.lanzamiento}
+              onChange={() => setProduct({ ...product, lanzamiento: !product.lanzamiento })}
+              style={styles.toggleInput}
+            />
+          </label>
+
+          <label style={styles.toggleLabel}>
+            Oferta
+            <input
+              type="checkbox"
+              checked={product.oferta}
+              onChange={() => setProduct({ ...product, oferta: !product.oferta })}
+              style={styles.toggleInput}
+            />
+          </label>
+        </div>
+        <div style={styles.subColeccionGroup}>
+        <label style={styles.subColeccionLabel}>
+          Subcolección
+          <select
+            value={product.subColeccionId}
+            onChange={(e) => setProduct({ ...product, subColeccionId: parseInt(e.target.value) })}
+            style={styles.selectInput}
+          >
+            {subcolecciones.map((subcoleccion) => (
+              <option key={subcoleccion.id} value={subcoleccion.id}>
+                {subcoleccion.nombre}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
         <button type="submit" style={styles.submitButton}>
           Agregar Camisa
         </button>
