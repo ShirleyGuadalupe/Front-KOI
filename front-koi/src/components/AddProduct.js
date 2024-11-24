@@ -1,36 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const AddProductForm = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     name: "",
     image: null,
-    colors: [],
+    subColeccion: 'lanzamiento',
   });
-  const [newColor, setNewColor] = useState("");
+
+  const handleSubmit = async (e) => {
+    const token = localStorage.getItem('token'); 
+    e.preventDefault();
+    try {
+      const response = await fetch('https://api-koi-production.up.railway.app/api/camisetas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, 
+          
+        },
+        body: JSON.stringify(product),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error en el registro');
+      }
+      console.log("Producto añadido:", product);
+      setTimeout(() => {
+        navigate('/catalog');
+      }, 1);
+    } catch (error) {
+      console.error('Error al añadir:', error);
+    }
+  };
+  
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setProduct({ ...product, image: URL.createObjectURL(file) });
-  };
-
-  const handleAddColor = () => {
-    if (newColor && !product.colors.includes(newColor)) {
-      setProduct({ ...product, colors: [...product.colors, newColor] });
-      setNewColor("");
-    }
-  };
-
-  const handleRemoveColor = (color) => {
-    setProduct({
-      ...product,
-      colors: product.colors.filter((c) => c !== color),
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Producto añadido:", product);
-    // Aquí puedes enviar los datos al backend.
   };
 
   return (
@@ -63,34 +71,6 @@ const AddProductForm = () => {
           onChange={(e) => setProduct({ ...product, name: e.target.value })}
           style={styles.input}
         />
-
-        <div style={styles.colorSection}>
-          <input
-            type="text"
-            placeholder="Añadir color"
-            value={newColor}
-            onChange={(e) => setNewColor(e.target.value)}
-            style={styles.input}
-          />
-          <button type="button" onClick={handleAddColor} style={styles.addButton}>
-            Añadir color
-          </button>
-        </div>
-
-        <div style={styles.colorList}>
-          {product.colors.map((color, index) => (
-            <div key={index} style={styles.colorItem}>
-              <span>{color}</span>
-              <button
-                type="button"
-                onClick={() => handleRemoveColor(color)}
-                style={styles.removeButton}
-              >
-                ✕
-              </button>
-            </div>
-          ))}
-        </div>
 
         <button type="submit" style={styles.submitButton}>
           Agregar Camisa

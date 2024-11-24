@@ -31,6 +31,7 @@ import { useNavigate } from 'react-router-dom';
       }
       const data = await response.json();
       console.log('Login exitoso:', data);
+      localStorage.setItem('token', data.token);
       setTimeout(() => {
         navigate('/profile');
       }, 1);
