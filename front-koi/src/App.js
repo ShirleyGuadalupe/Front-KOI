@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-//import Home from './pages/Home';
-//import Login from './pages/Login';
-//import Products from './pages/Products';
 import LoginForm from './components/LoginForm';
 import Header from './components/Header';
 import Register from './components/Register';
+import Profile from './pages/Profile';
+import AdminProfile from './pages/AdminProfile';
+import Catalog from './pages/Catalog';
+import AddProduct from './components/AddProduct';
 import './App.css';
 
 function App() {
@@ -15,7 +16,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginForm/>}/>
-          <Route path="/register" element={<Register/>}/> 
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/profile" element={<AdminProfile/>}/>
+          <Route path="/catalog" element={<Catalog/>}/>
+          <Route path="/adding-product" element={<AddProduct/>}/>
         </Routes>
       </Router>
     </div>

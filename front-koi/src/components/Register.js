@@ -39,7 +39,7 @@ const Register = () => {
     }
     
     try {
-      const response = await fetch('http://localhost:3001/api/auth/register', {
+      const response = await fetch('https://api-koi-production.up.railway.app/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,11 +73,10 @@ const Register = () => {
       <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
       <form className="register-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <input type="text" name= "username" placeholder="Nombre" onChange={handleChange} required/>
-          <input type="text" name="direccion" placeholder="Dirección" onChange={handleChange} required/>
+          <input type="text" name= "username" placeholder="Nombre completo" onChange={handleChange} required/>
         </div>
         <div className="form-group">
-          <input type="text" name='apellido' placeholder="Apellido" onChange={handleChange} required/>
+          <input type="text" name="direccion" placeholder="Dirección" onChange={handleChange} required/>
           <input type="text" name='ciudad' placeholder="Ciudad" onChange={handleChange} required/>
         </div>
         <div className="form-group">
