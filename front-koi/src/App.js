@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import AdminProfile from './pages/AdminProfile';
 import Catalog from './pages/Catalog';
 import AddProduct from './components/AddProduct';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/adding-product" element={<AddProduct/>}/>
         </Routes>
       </Router>
+      <footer>{<Footer/>}</footer>
     </div>
   );
 }
