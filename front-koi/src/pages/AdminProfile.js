@@ -6,6 +6,7 @@ const AdminProfile = () => {
   const [subCollections, setSubCollections] = useState([]);
   const [colors, setColors] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [isOpen, setIsOpen] = useState(false); // Estado local para cada colección
 
   useEffect(() => {
     fetchCollections();
@@ -262,33 +263,45 @@ const deleteCategory = async (id) => {
       <h1 className="title">MI PERFIL</h1>
 
       {/* Colecciones */}
-      <div className="section">
-        <h2>Colecciones</h2>
-        <ul className="list">
-  {collections.map((collection) => (
-    <li key={collection.id}>
-      <strong>{collection.nombre}</strong>
-      <button onClick={() => updateCollection(collection.id)}>✏️</button>
-      <button onClick={() => deleteCollection(collection.id)}>🗑️</button>
-      <button onClick={() => addSubCollection(collection.id)}>➕ SubColección</button>
+<div className="section">
+  <h2>Colecciones</h2>
+  <ul className="list">
+    {collections.map((collection) => {
       
-      {/* Subcolecciones */}
-      <ul className="sublist">
-        {subCollections
-          .filter((sub) => sub.coleccionId === collection.id) // Subcolecciones vinculadas
-          .map((sub) => (
-            <li key={sub.id}>
-              {sub.nombre}
-              <button onClick={() => updateSubCollection(sub.id)}>✏️</button>
-              <button onClick={() => deleteSubCollection(sub.id)}>🗑️</button>
-            </li>
-          ))}
-      </ul>
-    </li>
-  ))}
-</ul>
-        <button className="add-btn" onClick={addCollection}>Añadir colección ➕</button>
-      </div>
+
+      return (
+        <li key={collection.id}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <button
+              className={`toggle-btn ${isOpen ? "open" : ""}`}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              ▶
+            </button>
+            <strong>{collection.nombre}</strong>
+          </div>
+          <button onClick={() => updateCollection(collection.id)}>✏️</button>
+          <button onClick={() => deleteCollection(collection.id)}>🗑️</button>
+          <button onClick={() => addSubCollection(collection.id)}>➕ SubColección</button>
+
+          {/* Subcolecciones */}
+          <ul className={`sublist ${isOpen ? "open" : ""}`}>
+            {subCollections
+              .filter((sub) => sub.coleccionId === collection.id) // Subcolecciones vinculadas
+              .map((sub) => (
+                <li key={sub.id}>
+                  {sub.nombre}
+                  <button onClick={() => updateSubCollection(sub.id)}>✏️</button>
+                  <button onClick={() => deleteSubCollection(sub.id)}>🗑️</button>
+                </li>
+              ))}
+          </ul>
+        </li>
+      );
+    })}
+  </ul>
+  <button className="add-btn" onClick={addCollection}>Añadir colección ➕</button>
+</div>
 
       {/* Colores */}
       <div className="section">

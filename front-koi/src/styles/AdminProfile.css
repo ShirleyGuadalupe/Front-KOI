@@ -1,16 +1,33 @@
 .admin-profile-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
   text-align: center;
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #4CAF50;
 }
 
 .section {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.section h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #555;
 }
 
 .list {
@@ -18,51 +35,93 @@
   padding: 0;
 }
 
-.list li {
+.list > li {
+  margin-bottom: 15px;
+}
+
+.sublist {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 10px;
+  display: none; /* Ocultamos las subcolecciones inicialmente */
+}
+
+.sublist.open {
+  display: block; /* Mostrar cuando están abiertas */
+}
+
+.add-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.add-btn:hover {
+  background-color: #45a049;
+}
+
+.color-box-container, .category-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.add-btn {
-  background-color: #000;
-  color: #fff;
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.add-btn:hover {
-  background-color: #444;
-}
-
-.colors {
-  display: flex;
-  gap: 5px;
-}
-
 .color-box {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
   border: 1px solid #ccc;
 }
 
-.sizes {
-  display: flex;
-  gap: 10px;
+button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button:hover {
+  background-color: #d5d5d5;
 }
 
 .size {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
   background-color: #ddd;
-  padding: 5px 10px;
   border-radius: 5px;
+  font-size: 14px;
+  color: #555;
 }
 
-.category {
-  background-color: #ddd;
-  padding: 5px 10px;
-  border-radius: 5px;
+.size:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.category-container span {
+  flex: 1;
+}
+
+/* Estilo para la flecha que controla la expansión de subcolecciones */
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
   margin-right: 10px;
+  transform: rotate(0deg);
+  transition: transform 0.3s;
+}
+
+.toggle-btn.open {
+  transform: rotate(90deg); /* Rota la flecha al abrir */
 }
