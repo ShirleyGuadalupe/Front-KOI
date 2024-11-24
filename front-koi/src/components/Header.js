@@ -7,6 +7,7 @@ const handleLogout = () => {
 
 const Header = () => {
   const isLoggedIn = localStorage.getItem('token');
+  const isAdmin = localStorage.getItem('user');
 
   return (
     <header>
@@ -47,7 +48,10 @@ const Header = () => {
       {/* Barra Principal */}
       <div className="header-container">
         <div className="logo-container">
-          <img href="/" src="https://i.ibb.co/NjH0d6K/LOGO.jpg" alt="Koi Logo" className="logo" />
+          <a href="/">
+          <img src="https://i.ibb.co/NjH0d6K/LOGO.jpg" alt="Koi Logo" className="logo" />
+          </a>
+          
         </div>
         <nav className="main-nav">
           <ul className="horizontal-list">
@@ -68,7 +72,16 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        {isLoggedIn ? (
+        {isLoggedIn && isAdmin ? (
+            <div className="header-actions">
+            <a href="/cart">
+              <img src="https://i.ibb.co/1RrNZJ2/CARRITO.png" alt="Carrito" className="icon" />
+            </a>
+            <a href="/profile-admin">
+              <img src="https://i.ibb.co/ry5rBkt/usuario.png" alt="Perfil" className="icon" />
+            </a>
+          </div>
+          ):(
             <div className="header-actions">
             <a href="/cart">
               <img src="https://i.ibb.co/1RrNZJ2/CARRITO.png" alt="Carrito" className="icon" />
@@ -77,8 +90,6 @@ const Header = () => {
               <img src="https://i.ibb.co/ry5rBkt/usuario.png" alt="Perfil" className="icon" />
             </a>
           </div>
-          ):(
-            <div></div>
           )}
         
       </div>
