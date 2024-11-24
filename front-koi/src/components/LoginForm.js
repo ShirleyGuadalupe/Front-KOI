@@ -33,7 +33,8 @@ import { useNavigate } from 'react-router-dom';
       console.log('Login exitoso:', data);
       localStorage.setItem('token', data.token);
       setTimeout(() => {
-        navigate('/profile');
+        if(data.user.isAdmin) navigate('/profile-admin');
+        else navigate("/profile");
       }, 1);
     } catch (error) {
       console.error('Error al ingresar:', error);

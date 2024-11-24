@@ -1,110 +1,68 @@
 .admin-profile-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .title {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .section {
-    margin-bottom: 20px;
-  }
-  
-  .list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .list li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .add-btn {
-    background-color: #000;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .add-btn:hover {
-    background-color: #444;
-  }
-  
-  .colors {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .color-box {
-    width: 25px;
-    height: 25px;
-    border: 1px solid #ccc;
-  }
-  
-  .sizes {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .size {
-    background-color: #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-  .category {
-    background-color: #ddd;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-right: 10px;
-  }
-  
-  .status {
-    padding: 10px;
-    margin-bottom: 10px;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .fabrication {
-    background-color: #F28B82;
-  }
-  
-  .shipping {
-    background-color: #AECBFA;
-  }
-  
-  .delivered {
-    background-color: #81C995;
-  }
-  
-  .info-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .info-list li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .edit-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #000;
-  }
-  
-  .edit-btn:hover {
-    color: #444;
-  }
-  
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.add-btn:hover {
+  background-color: #444;
+}
+
+.colors {
+  display: flex;
+  gap: 5px;
+}
+
+.color-box {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ccc;
+}
+
+.sizes {
+  display: flex;
+  gap: 10px;
+}
+
+.size {
+  background-color: #ddd;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.category {
+  background-color: #ddd;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
