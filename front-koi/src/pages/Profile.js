@@ -38,11 +38,6 @@ const Profile = () => {
           </div>
         ))}
       </div>
-      <div className="profile-section">
-        <h2>Mis Solicitudes</h2>
-        {/* Agregar lista de solicitudes*/}
-        <div className="solicitud-card">Sin solicitudes pendientes</div>
-      </div>
     </div>
   );
 };

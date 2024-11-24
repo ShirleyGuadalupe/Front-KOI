@@ -12,7 +12,7 @@ const Register = () => {
     departamento: '',
     ciudad: '',
     direccion: '', 
-    isAdmin: '',
+    isAdmin: false,
   });
 
   const [message, setMessage] = useState('');
