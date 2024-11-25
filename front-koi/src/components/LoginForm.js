@@ -32,6 +32,13 @@ import { useNavigate } from 'react-router-dom';
       console.log('Login exitoso:', data);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', data.user.isAdmin);
+      localStorage.setItem('username', data.user.username);
+      localStorage.setItem('email', data.user.email);
+      localStorage.setItem('telefono', data.user.telefono);
+      localStorage.setItem('direccion', data.user.direccion);
+      localStorage.setItem('ciudad', data.user.ciudad);
+      localStorage.setItem('departamento', data.user.departamento);
+      
       setTimeout(() => {
         if(data.user.isAdmin) {
           navigate('/profile-admin');
