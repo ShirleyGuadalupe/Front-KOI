@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import '../styles/LoginForm.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "../styles/LoginForm.css";
+import { useNavigate } from "react-router-dom";
 
-  const LoginForm = () => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email: '', 
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -17,59 +17,74 @@ import { useNavigate } from 'react-router-dom';
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://api-koi-production.up.railway.app/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://api-koi-production.up.railway.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error('Error en el registro');
+        throw new Error("Error en el registro");
       }
       const data = await response.json();
-      console.log('Login exitoso:', data);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', data.user.isAdmin);
+      console.log("Login exitoso:", data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", data.user.isAdmin);
+      localStorage.setItem("username", data.user.username);
+      localStorage.setItem("email", data.user.email);
+      localStorage.setItem("telefono", data.user.telefono);
+      localStorage.setItem("direccion", data.user.direccion);
+      localStorage.setItem("ciudad", data.user.ciudad);
+      localStorage.setItem("departamento", data.user.departamento);
+
+      window.location.reload()
+
       setTimeout(() => {
-        if(data.user.isAdmin) {
-          navigate('/profile-admin');
+        if (data.token) {
+          navigate("/profile");
         }
-        else navigate("/profile");
       }, 1);
     } catch (error) {
-      console.error('Error al ingresar:', error);
+      console.error("Error al ingresar:", error);
     }
   };
 
   return (
     <div className="login-container">
-      <h2 className='bienvenidos'>BIENVENIDO</h2>
+      <h2 className="bienvenidos">BIENVENIDO</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <label htmlFor="email">CORREO ELECTRÓNICO</label>
-          <input 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            required 
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
           />
         </div>
         <div className="form-group">
           <label htmlFor="password">CONTRASEÑA</label>
-          <input 
-            type="password" 
-            name="password" 
-            value={formData.password} 
-            onChange={handleChange} 
-            required 
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
           />
         </div>
-        <button type="submit" className="btn">Ingresar</button>
+        <button type="submit" className="btn">
+          Ingresar
+        </button>
       </form>
-      <p className='parrafo'>¿No tienes una cuenta? <a href="/register">Crea una</a></p>
+      <p className="parrafo">
+        ¿No tienes una cuenta? <a href="/register">Crea una</a>
+      </p>
     </div>
   );
 };
