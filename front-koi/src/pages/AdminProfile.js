@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ChromePicker } from 'react-color'; // Importamos el color picker
 import "../styles/AdminProfile.css";
 
 const AdminProfile = () => {
@@ -6,7 +7,10 @@ const AdminProfile = () => {
   const [subCollections, setSubCollections] = useState([]);
   const [colors, setColors] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [isOpen, setIsOpen] = useState(false); // Estado local para cada colección
+
+  const [isOpen, setIsOpen] = useState(false); // Estado para mostrar las subcolecciones
+  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false); // Estado para abrir/cerrar el color picker
+  const [selectedColor, setSelectedColor] = useState("#000000"); // El color seleccionado por el usuario
   const isLoggedIn = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("user");
   const username = localStorage.getItem("username");
@@ -16,6 +20,7 @@ const AdminProfile = () => {
   const ciudad = localStorage.getItem("ciudad");
   const departamento = localStorage.getItem("departamento");
 
+
   useEffect(() => {
     fetchCollections();
     fetchSubCollections();
@@ -24,9 +29,9 @@ const AdminProfile = () => {
   }, []);
 
   const fetchSubCollections = async () => {
-    const response = await fetch(
-      "https://api-koi-production.up.railway.app/api/sub-colecciones"
-    );
+
+    const response = await fetch("https://api-koi-production.up.railway.app/api/sub-colecciones");
+
     const data = await response.json();
     setSubCollections(data);
   };
@@ -53,6 +58,37 @@ const AdminProfile = () => {
     );
     const data = await response.json();
     setCategories(data);
+  };
+
+  // Función para añadir un color
+  const addColor = async () => {
+    const token = localStorage.getItem("token");
+    if (selectedColor) {
+      const response = await fetch("https://api-koi-production.up.railway.app/api/colores", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ hex: selectedColor }),
+      });
+      if (response.ok) {
+        fetchColors(); // Refrescar la lista de colores
+        setIsColorPickerOpen(false); // Cerrar el color picker
+      } else {
+        alert("Error al añadir el color.");
+      }
+    }
+  };
+
+  // Función para manejar el cambio de color
+  const handleColorChange = (color) => {
+    setSelectedColor(color.hex); // Actualizar el estado con el color seleccionado
+  };
+
+  // Función para abrir/cerrar el color picker
+  const toggleColorPicker = () => {
+    setIsColorPickerOpen(!isColorPickerOpen);
   };
 
   // Add Collection
@@ -163,52 +199,20 @@ const AdminProfile = () => {
     }
   };
 
-  const addColor = async () => {
-    const token = localStorage.getItem("token");
-    const hex = prompt(
-      "Selecciona el color en formato hexadecimal (ej: #FF5733):"
-    );
-    if (hex && /^#([0-9A-F]{3}){1,2}$/i.test(hex)) {
-      // Validar formato hexadecimal
-      const response = await fetch(
-        "https://api-koi-production.up.railway.app/api/colores",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ hex }),
-        }
-      );
-      if (response.ok) {
-        fetchColors(); // Refrescar lista de colores
-      } else {
-        alert("Error al añadir el color.");
-      }
-    } else {
-      alert("El formato de color no es válido.");
-    }
-  };
-
   // Update Color
   const updateColor = async (id) => {
     const token = localStorage.getItem("token");
-    const hex = prompt(
-      "Ingrese el nuevo color en formato hexadecimal (ej: #FF5733):"
-    );
+
+    const hex = prompt("Ingrese el nuevo color en formato hexadecimal (ej: #FF5733):");
     if (hex && /^#([0-9A-F]{3}){1,2}$/i.test(hex)) {
-      const response = await fetch(
-        `https://api-koi-production.up.railway.app/api/colores/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ hex }),
-        }
-      );
+      const response = await fetch(`https://api-koi-production.up.railway.app/api/colores/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ hex }),
+      });
       if (response.ok) {
         fetchColors(); // Refrescar lista de colores
       } else {
@@ -219,18 +223,17 @@ const AdminProfile = () => {
     }
   };
 
+
   // Delete Color
   const deleteColor = async (id) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(
-      `https://api-koi-production.up.railway.app/api/colores/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`https://api-koi-production.up.railway.app/api/colores/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
     if (response.ok) {
       fetchColors(); // Refrescar lista de colores
     } else {
@@ -238,6 +241,7 @@ const AdminProfile = () => {
     }
   };
 
+  // Add Category
   const addCategory = async () => {
     const token = localStorage.getItem("token");
     const nombre = prompt("Ingrese el nombre de la categoría:");
@@ -271,17 +275,16 @@ const AdminProfile = () => {
     const nombre = prompt("Ingrese el nuevo nombre de la categoría:");
     const precio = prompt("Ingrese el nuevo precio de la categoría:");
     if (nombre && precio && !isNaN(precio)) {
-      const response = await fetch(
-        `https://api-koi-production.up.railway.app/api/tipo/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ nombre, precio: parseFloat(precio) }),
-        }
-      );
+
+      const response = await fetch(`https://api-koi-production.up.railway.app/api/tipo/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ nombre, precio: parseFloat(precio) }),
+      });
+
       if (response.ok) {
         fetchCategories(); // Refrescar lista de categorías
       } else {
@@ -295,15 +298,14 @@ const AdminProfile = () => {
   // Delete Category
   const deleteCategory = async (id) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(
-      `https://api-koi-production.up.railway.app/api/tipo/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+
+    const response = await fetch(`https://api-koi-production.up.railway.app/api/tipo/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
     if (response.ok) {
       fetchCategories(); // Refrescar lista de categorías
     } else {
@@ -314,6 +316,7 @@ const AdminProfile = () => {
   return (
     <div className="admin-profile-container">
       <h1 className="title">MI PERFIL</h1>
+
 
       {isLoggedIn && (
         <div className="profile-container">
@@ -395,24 +398,37 @@ const AdminProfile = () => {
           </div>
 
           {/* Colores */}
-          <div className="section">
-            <h2>Colores</h2>
-            <div className="colors">
-              {colors.map((color) => (
-                <div key={color.id} className="color-box-container">
-                  <div
-                    style={{ backgroundColor: color.hex }}
-                    className="color-box"
-                  />
-                  <button onClick={() => updateColor(color.id)}>✏️</button>
-                  <button onClick={() => deleteColor(color.id)}>🗑️</button>
-                </div>
-              ))}
+      <div className="section">
+        <h2>Colores</h2>
+        <div className="colors">
+          {colors.map((color) => (
+            <div key={color.id} className="color-box-container">
+              <div
+                style={{ backgroundColor: color.hex }}
+                className="color-box"
+              />
+              <button onClick={() => updateColor(color.id)}>✏️</button>
+              <button onClick={() => deleteColor(color.id)}>🗑️</button>
             </div>
-            <button className="add-btn" onClick={addColor}>
-              Añadir color ➕
+          ))}
+        </div>
+        <button className="add-btn" onClick={toggleColorPicker}>
+          Añadir color ➕
+        </button>
+
+        {/* Color Picker */}
+        {isColorPickerOpen && (
+          <div className="color-picker-container">
+            <ChromePicker
+              color={selectedColor}
+              onChangeComplete={handleColorChange}
+            />
+            <button onClick={addColor} className="confirm-color-btn">
+              Confirmar Color
             </button>
           </div>
+        )}
+      </div>
 
           {/* Categorías */}
           <div className="section">
@@ -437,6 +453,7 @@ const AdminProfile = () => {
             </button>
           </div>
 
+
           {/* Tallas */}
           <div className="section">
             <h2>Tallas</h2>
@@ -453,5 +470,4 @@ const AdminProfile = () => {
     </div>
   );
 };
-
 export default AdminProfile;

@@ -6,7 +6,12 @@ const CatalogPage = () => {
   const [launchProducts, setLaunchProducts] = useState([]);
   const [offerProducts, setOfferProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const isAdmin = localStorage.getItem('user');
+  const handleDelete = (productId) => {
+    // Filtra el producto eliminado de la lista de productos de oferta
+    setOfferProducts(prevProducts => prevProducts.filter(product => product.id !== productId));
+  };
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -46,20 +51,23 @@ const CatalogPage = () => {
         ) : (
           <div>No hay productos de lanzamiento disponibles.</div>
         )}
+        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
       </div>
       <div style={styles.links}>
-        <Link to="/lanzamientos" style={styles.link}>Ver más lanzamientos</Link>        
+        <Link to="/lanzamientos" style={styles.link}>Ver más lanzamientos</Link>
       </div>
       {/* Productos de Ofertas */}
       <h2 style={styles.subTitle}>Ofertas</h2>
       <div style={styles.grid}>
         {offerProducts.length > 0 ? (
           offerProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onDelete={handleDelete}/>
           ))
         ) : (
           <div>No hay productos de oferta disponibles.</div>
         )}
+        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
+        
       </div>
 
       {/* Enlaces para ver más productos */}
@@ -96,7 +104,15 @@ const styles = {
     marginRight: "16px",
     color: "#007BFF",
     textDecoration: "none",
-  }
+  },
+  addButton: {
+    padding: "10px 16px",
+    backgroundColor: "#e0e0e0",
+    border: "none",
+    borderRadius: "8px",
+    cursor: "pointer",
+    alignSelf: "center",
+  },
 };
 
 export default CatalogPage;

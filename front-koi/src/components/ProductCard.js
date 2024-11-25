@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom"; // Importamos useNavigate
 const ProductCard = ({ product, onDelete }) => {
   const [image, setImage] = useState(null); // Estado para almacenar la primera imagen
   const navigate = useNavigate(); // Usamos el hook useNavigate para la navegación
-
+  const isAdmin = localStorage.getItem('user');
+  console.log(isAdmin)
   useEffect(() => {
     const fetchImage = async () => {
       try {
@@ -60,6 +61,7 @@ const ProductCard = ({ product, onDelete }) => {
       <div style={styles.details}>
         <h3 style={styles.title}>{product.nombre}</h3> {/* Asumiendo que 'name' es el nombre del producto */}
       </div>
+      { isAdmin ==="true" ? (
       <div style={styles.actions}>
         {/* Botón de editar: navega a la página de edición */}
         <button 
@@ -76,7 +78,7 @@ const ProductCard = ({ product, onDelete }) => {
         >
           🗑️
         </button>
-      </div>
+      </div>) : (<></>)}
     </div>
   );
 };
