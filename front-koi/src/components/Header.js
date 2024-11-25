@@ -72,8 +72,8 @@ const Header = () => {
             </li>
           </ul>
         </nav>
-        {isLoggedIn && isAdmin ? (
-            <div className="header-actions">
+        {isLoggedIn && isAdmin && (
+          <div className="header-actions">
             <a href="/cart">
               <img src="https://i.ibb.co/1RrNZJ2/CARRITO.png" alt="Carrito" className="icon" />
             </a>
@@ -81,8 +81,10 @@ const Header = () => {
               <img src="https://i.ibb.co/ry5rBkt/usuario.png" alt="Perfil" className="icon" />
             </a>
           </div>
-          ):(
-            <div className="header-actions">
+        )}
+
+        {isLoggedIn && !isAdmin && (
+          <div className="header-actions">
             <a href="/cart">
               <img src="https://i.ibb.co/1RrNZJ2/CARRITO.png" alt="Carrito" className="icon" />
             </a>
@@ -90,8 +92,7 @@ const Header = () => {
               <img src="https://i.ibb.co/ry5rBkt/usuario.png" alt="Perfil" className="icon" />
             </a>
           </div>
-          )}
-        
+        )}
       </div>
     </header>
   );
