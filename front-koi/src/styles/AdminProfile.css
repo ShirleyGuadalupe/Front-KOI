@@ -125,3 +125,19 @@ button:hover {
 .toggle-btn.open {
   transform: rotate(90deg); /* Rota la flecha al abrir */
 }
+.color-picker-container {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-color-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
