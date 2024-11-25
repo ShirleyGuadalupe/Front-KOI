@@ -42,11 +42,10 @@ const LoginForm = () => {
       localStorage.setItem("ciudad", data.user.ciudad);
       localStorage.setItem("departamento", data.user.departamento);
 
-      window.location.reload()
-
       setTimeout(() => {
         if (data.token) {
           navigate("/profile");
+          window.location.reload()
         }
       }, 1);
     } catch (error) {

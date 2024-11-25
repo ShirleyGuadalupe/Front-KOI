@@ -320,7 +320,6 @@ const AdminProfile = () => {
 
       {isLoggedIn && (
         <div className="profile-container">
-          <h1 className="profile-title">Mi Perfil</h1>
           <div className="profile-card">
             <div className="profile-info">
               <h2>{username}</h2>
