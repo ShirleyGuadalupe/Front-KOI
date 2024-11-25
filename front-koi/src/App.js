@@ -7,7 +7,11 @@ import Profile from './pages/Profile';
 import AdminProfile from './pages/AdminProfile';
 import Catalog from './pages/Catalog';
 import AddProduct from './components/AddProduct';
+import EditProduct from './pages/editProduct'
+import LaunchPage from "./pages/LaunchPage"; 
+import OfferPage from "./pages/OfferPage"; 
 import Footer from './components/Footer';
+
 import './App.css';
 
 function App() {
@@ -22,6 +26,9 @@ function App() {
           <Route path="/profile-admin" element={<AdminProfile/>}/>
           <Route path="/catalog" element={<Catalog/>}/>
           <Route path="/adding-product" element={<AddProduct/>}/>
+          <Route path="/edit-product/:id" element={<EditProduct />} />
+          <Route path="/lanzamientos" element={<LaunchPage />} /> 
+        <Route path="/ofertas" element={<OfferPage />} />
         </Routes>
       </Router>
       <footer>{<Footer/>}</footer>
