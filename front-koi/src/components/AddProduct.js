@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const AddProductForm = () => {
@@ -10,12 +10,12 @@ const AddProductForm = () => {
     subColeccionId: 1,
   });
   const [subcolecciones, setSubcolecciones] = useState([]);
-  
+
   useEffect(() => {
     fetch('https://api-koi-production.up.railway.app/api/sub-colecciones')
       .then(response => response.json())
       .then(data => {
-        setSubcolecciones(data); 
+        setSubcolecciones(data);
       })
       .catch(error => console.error('Error al obtener subcolecciones:', error));
   }, []);
@@ -36,9 +36,12 @@ const AddProductForm = () => {
       if (!response.ok) {
         throw new Error('Error en el registro');
       }
+      const responseData = await response.json();
+      const camisetaId = responseData.id;
       console.log("Producto añadido:", product);
+      console.log(response)
       setTimeout(() => {
-        navigate('/catalog');
+        navigate(`/edit-product/${camisetaId}`);
       }, 1);
     } catch (error) {
       console.error('Error al añadir:', error);
@@ -105,21 +108,21 @@ const AddProductForm = () => {
           </label>
         </div>
         <div style={styles.subColeccionGroup}>
-        <label style={styles.subColeccionLabel}>
-          Subcolección
-          <select
-            value={product.subColeccionId}
-            onChange={(e) => setProduct({ ...product, subColeccionId: parseInt(e.target.value) })}
-            style={styles.selectInput}
-          >
-            {subcolecciones.map((subcoleccion) => (
-              <option key={subcoleccion.id} value={subcoleccion.id}>
-                {subcoleccion.nombre}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+          <label style={styles.subColeccionLabel}>
+            Subcolección
+            <select
+              value={product.subColeccionId}
+              onChange={(e) => setProduct({ ...product, subColeccionId: parseInt(e.target.value) })}
+              style={styles.selectInput}
+            >
+              {subcolecciones.map((subcoleccion) => (
+                <option key={subcoleccion.id} value={subcoleccion.id}>
+                  {subcoleccion.nombre}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
         <button type="submit" style={styles.submitButton}>
           Agregar Camisa
         </button>
