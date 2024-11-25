@@ -1,0 +1,42 @@
+.footer-container {
+    background-color: #000; /* Negro */
+    color: #fff; /* Blanco */
+    text-align: center;
+    font-size: small;
+    padding: 50px;
+
+  }
+  
+  .footer-content,
+  .footer-mission,
+  .footer-vision {
+    padding-right: 400px;
+    padding-left: 400px;
+    margin-top: 70px;
+  }
+  
+  .footer-content img.flag {
+    width: 70px; /* Tamaño de la bandera */
+  }
+  
+  .footer-mission p,
+  .footer-vision p {
+    line-height: 1.5;
+  }
+  
+  .footer-bottom {
+    margin-top: 70px;
+    justify-content: left;
+  }
+  
+  .footer-bottom .logos {
+    display: flex;
+    justify-content: right;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .footer-bottom .logos img.logo {
+    width: 80px; /* Ajustar según el tamaño del logo */
+  }
+  

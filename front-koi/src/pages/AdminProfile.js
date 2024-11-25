@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/AdminProfile.css";
 
 const AdminProfile = () => {
+
   const [collections, setCollections] = useState([]);
   const [subCollections, setSubCollections] = useState([]);
   const [colors, setColors] = useState([]);

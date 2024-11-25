@@ -8,8 +8,10 @@ import AdminProfile from './pages/AdminProfile';
 import Catalog from './pages/Catalog';
 import AddProduct from './components/AddProduct';
 import EditProduct from './pages/editProduct'
-import LaunchPage from "./pages/LaunchPage"; // Página de lanzamientos
-import OfferPage from "./pages/OfferPage"; // Página de ofertas
+import LaunchPage from "./pages/LaunchPage"; 
+import OfferPage from "./pages/OfferPage"; 
+import Footer from './components/Footer';
+
 import './App.css';
 
 function App() {
@@ -29,6 +31,7 @@ function App() {
         <Route path="/ofertas" element={<OfferPage />} />
         </Routes>
       </Router>
+      <footer>{<Footer/>}</footer>
     </div>
   );
 }

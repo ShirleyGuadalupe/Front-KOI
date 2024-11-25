@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../styles/LoginForm.css';
 import { useNavigate } from 'react-router-dom';
 
-
   const LoginForm = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -32,8 +31,11 @@ import { useNavigate } from 'react-router-dom';
       const data = await response.json();
       console.log('Login exitoso:', data);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', data.user.isAdmin);
       setTimeout(() => {
-        if(data.user.isAdmin) navigate('/profile-admin');
+        if(data.user.isAdmin) {
+          navigate('/profile-admin');
+        }
         else navigate("/profile");
       }, 1);
     } catch (error) {

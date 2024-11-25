@@ -15,6 +15,7 @@ ul.horizontal-list li {
     display: inline-block;
     padding: 0px 30px;
     text-align: center;
+    
   }
 .header-container {
     margin: 0px 0px 40px;
@@ -55,8 +56,6 @@ a.btn-bar-login {
 
 .main-nav {
     background-color: black;
-    padding: 30px;
-    margin-bottom: 30px;
   }
   
 ul.main-nav {
@@ -69,4 +68,56 @@ a.main-nav {
     color: white;
     text-decoration: none;
     font-size: 16px;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #cfcfcf;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: white;
+  }
+  
+  .logo-container {
+    flex: 0.3;
+  }
+  
+  .logo {
+    height: 100px; /* Ajusta según sea necesario */
+  }
+  
+  .main-nav {
+    flex: 2;
+  }
+  
+  ul.horizontal-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .horizontal-list .letters {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .header-actions {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  
+  .icon {
+    width: 50px;
+    height: 50px;
   }
