@@ -10,6 +10,7 @@ import EditProduct from './pages/editProduct'
 import LaunchPage from "./pages/LaunchPage"; 
 import OfferPage from "./pages/OfferPage"; 
 import Footer from './components/Footer';
+import Home from './components/Home';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
       <header>{<Header/>}</header>
       <Router>
         <Routes>
+          <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/profile" element={<AdminProfile/>}/>

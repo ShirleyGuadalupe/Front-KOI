@@ -1,0 +1,59 @@
+.homepage-container {
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .carousel-image {
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+  }
+  
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .carousel-btn.left {
+    left: 10px;
+  }
+  
+  .carousel-btn.right {
+    right: 10px;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 50px;
+  }
+  
+  .feature-item {
+    text-align: center;
+    max-width: 200px;
+  }
+  
+  .feature-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
