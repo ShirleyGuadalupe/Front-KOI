@@ -41,7 +41,7 @@ const LoginForm = () => {
       localStorage.setItem("direccion", data.user.direccion);
       localStorage.setItem("ciudad", data.user.ciudad);
       localStorage.setItem("departamento", data.user.departamento);
-
+      localStorage.setItem("id",data.user.id);
       window.location.reload()
 
       setTimeout(() => {

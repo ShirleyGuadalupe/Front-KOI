@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import '../styles/editProduct.css'
 const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
     const [product, setProduct] = useState({
-        name: '',
+        nombre: '',
         lanzamiento: false,
         oferta: false,
         subColeccionId: 1,
@@ -18,6 +19,8 @@ const EditProduct = () => {
     const [colores, setColores] = useState([]); // Colores asociados a la camiseta
     const [allColores, setAllColores] = useState([]); // Todos los colores disponibles
     const [selectedColor, setSelectedColor] = useState(null);
+    const [message, setMessage] = useState('');
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
     useEffect(() => {
         fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}`)
             .then((response) => response.json())
@@ -87,6 +90,11 @@ const EditProduct = () => {
                 // Agregar el nuevo color a la lista de colores asociados
                 setColores((prevColores) => [...prevColores, data]);
                 window.location.reload();
+                setMessage('Color Añadido correctamente')
+                setIsPopupVisible(true);
+                setTimeout(() => {
+                    setIsPopupVisible(false);
+                }, 3000);
             })
             .catch((error) => {
                 console.error('Error al agregar el color:', error);
@@ -145,6 +153,11 @@ const EditProduct = () => {
                     .then((data) => {
                         console.log('Imagen añadida:', data);
                         setImages([...images, { url: uploadedImageUrl }]);
+                        setMessage('Imagen subida correctamente')
+                        setIsPopupVisible(true);
+                        setTimeout(() => {
+                            setIsPopupVisible(false);
+                        }, 3000);
                     })
                     .catch((error) => {
                         console.error('Error al añadir la imagen:', error);
@@ -169,7 +182,14 @@ const EditProduct = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Producto actualizado:', data);
-                navigate(`/product/${id}`);
+                // navigate(`/product/${id}`);   
+                setMessage('Producto Actualizado Correctamente')
+                setIsPopupVisible(true); // Mostrar el popup
+
+                // Ocultar el popup después de 3 segundos
+                setTimeout(() => {
+                    setIsPopupVisible(false);
+                }, 3000);
             })
             .catch((error) => {
                 console.error('Error al actualizar el producto:', error);
@@ -187,8 +207,8 @@ const EditProduct = () => {
 
                 <input
                     type="text"
-                    name="name"
-                    value={product.name}
+                    name="nombre"
+                    value={product.nombre}
                     onChange={handleProductChange}
                     placeholder={product.nombre}
                     style={styles.input}
@@ -323,32 +343,32 @@ const EditProduct = () => {
                     >
                         <option value="">Seleccione un color</option>
                         {allColores.map((color) => (
-            <option 
-                key={color.id} 
-                value={color.id} 
-                style={{ 
-                    backgroundColor: `${color.hex}`, 
-                    color: '#fff', // Asegura que el texto sea legible
-                    paddingLeft: '30px', // Espacio para el cuadrado del color
-                    position: 'relative',
-                }}
-            >
-                {/* Espacio para el cuadrado de color */}
-                <span 
-                    style={{
-                        position: 'absolute',
-                        left: '5px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        width: '15px',
-                        height: '15px',
-                        backgroundColor: `${color.hex}`,
-                        borderRadius: '3px', // Hacer el cuadrado con bordes redondeados
-                    }}
-                />
-                {color.hex}
-            </option>
-        ))}
+                            <option
+                                key={color.id}
+                                value={color.id}
+                                style={{
+                                    backgroundColor: `${color.hex}`,
+                                    color: '#fff', // Asegura que el texto sea legible
+                                    paddingLeft: '30px', // Espacio para el cuadrado del color
+                                    position: 'relative',
+                                }}
+                            >
+                                {/* Espacio para el cuadrado de color */}
+                                <span
+                                    style={{
+                                        position: 'absolute',
+                                        left: '5px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        width: '15px',
+                                        height: '15px',
+                                        backgroundColor: `${color.hex}`,
+                                        borderRadius: '3px', // Hacer el cuadrado con bordes redondeados
+                                    }}
+                                />
+                                {color.hex}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
@@ -357,6 +377,11 @@ const EditProduct = () => {
                 </button>
                 <Link to="/profile-admin" >Crear Colores</Link>
             </div>
+            {isPopupVisible && (
+                <div className="popup">
+                    {message}
+                </div>
+            )}
         </div>
     );
 };
@@ -407,6 +432,7 @@ const styles = {
         boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
         maxWidth: '500px',
         width: '100%',
+        borderTop: "1px solid #ddd",
     },
     imagesSection: {
         display: 'flex',

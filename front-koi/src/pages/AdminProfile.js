@@ -344,7 +344,7 @@ const AdminProfile = () => {
         </div>
       )}
 
-      {isAdmin === true && (
+      {isAdmin === "true" && (
         <div>
           {/* Colecciones */}
           <div className="section">
