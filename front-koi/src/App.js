@@ -13,7 +13,8 @@ import Footer from './components/Footer';
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Home from './components/Home';
-
+import Coleccion from './pages/Coleccion';
+import SubColeccion from './pages/Subcoleccion';
 import './App.css';
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
           <Route path="/ofertas" element={<OfferPage />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/colecciones/:id" element={<Coleccion />} />
+          <Route path="/colecciones/:id/:secondId" element={<SubColeccion />} />
         </Routes>
       </Router>
       <footer>{<Footer />}</footer>
