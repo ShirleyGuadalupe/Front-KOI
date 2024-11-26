@@ -143,7 +143,7 @@ const Cart = () => {
 
     return (
         <div style={styles.container}>
-            <h1 style={styles.title} id="titulo">Carrito de Compras</h1>
+            <h1 style={styles.title} id="titulo">TU CARRITO DE COMPRAS</h1>
 
             {/* Lista de productos */}
             <div style={styles.itemsContainer}>
@@ -161,10 +161,10 @@ const Cart = () => {
                         {/* Detalles del producto */}
                         <div style={styles.itemDetails}>
                             <h2 style={styles.itemName}>{item.nombre}</h2>
-                            <p>Tipo de Camisa: {tipoCamisaMap[item.tipoCamisaId] || "Cargando..."}</p>
-                            <p>Talla: {item.talla}</p>
+                            <p>TIPO DE CAMISA: {tipoCamisaMap[item.tipoCamisaId] || "Cargando..."}</p>
+                            <p>TALLA: {item.talla}</p>
                             <div style={styles.colorContainer}>
-                                <p>Color:</p>
+                                <p>COLOR:</p>
                                 <div
                                     style={{
                                         ...styles.colorBox,
@@ -172,8 +172,8 @@ const Cart = () => {
                                     }}
                                 ></div>
                             </div>
-                            <p>Cantidad: {item.cantidad}</p>
-                            <p>Precio Unitario: ${item.precio.toLocaleString()}</p>
+                            <p>CANTIDAD: {item.cantidad}</p>
+                            <p>PRECIO UNITARIO: ${item.precio.toLocaleString()}</p>
                             <div>
                                 <button
                                     style={styles.deleteButton}
@@ -184,7 +184,7 @@ const Cart = () => {
                                         src="https://i.ibb.co/qNT5fZ0/close-icon.png"
                                         alt="Eliminar"
                                         style={styles.deleteButtonImage}
-                                    />Eliminar Producto
+                                    />
                                 </button>
                             </div>
                         </div>
@@ -194,7 +194,7 @@ const Cart = () => {
 
             {/* Resumen del precio total */}
             <div style={styles.summary}>
-                <h2>Total: ${cart.totalPrice.toLocaleString()}</h2>
+                <h2>TOTAL: ${cart.totalPrice.toLocaleString()}</h2>
                 <button style={styles.checkoutButton}>Finalizar Compra</button>
             </div>
             {isPopupVisible && (
@@ -208,26 +208,26 @@ const Cart = () => {
 
 const styles = {
     container: {
-        padding: "20px",
-        fontFamily: "Arial, sans-serif",
+        backgroundColor:"#cdcdcd",
         maxWidth: "800px",
-        margin: "0 auto",
+        margin:"auto",
+        marginTop: "40px",
+        alignItems:"center",
     },
     title: {
-        fontSize: "28px",
-        fontWeight: "bold",
+        fontSize: "20px",
         textAlign: "center",
         marginBottom: "20px",
+        padding:"20px",
     },
     itemsContainer: {
-        borderTop: "1px solid #ddd",
         marginBottom: "20px",
         alignItems: "center"
     },
     item: {
         display: "flex",
         alignItems: "center",
-        borderBottom: "1px solid #ddd",
+        
         padding: "10px 0",
     },
     imageContainer: {
@@ -247,24 +247,28 @@ const styles = {
         gap: "5px",
     },
     itemName: {
-        fontSize: "20px",
+        fontSize: "18px",
         fontWeight: "bold",
         marginBottom: "10px",
     },
     colorContainer: {
+        marginLeft:"10px",
         display: "flex",
         alignItems: "center",
         gap: "10px",
     },
     colorBox: {
+        
         width: "30px",
         height: "30px",
+        display: "flex",
         borderRadius: "50%",
         border: "1px solid #000",
     },
     summary: {
         textAlign: "center",
         marginTop: "20px",
+        marginBottom: "30px",
         padding: "10px 0",
         backgroundColor: "#f8f8f8",
         borderRadius: "5px",
@@ -275,7 +279,7 @@ const styles = {
         color: "#fff",
         fontSize: "16px",
         border: "none",
-        borderRadius: "5px",
+        borderRadius: "10px",
         cursor: "pointer",
     },
     loading: {
@@ -290,11 +294,11 @@ const styles = {
         marginTop: "50px",
     },
     deleteButton: {
-        padding: "5px 10px",
+        padding: "10px",
         backgroundColor: "red",
         color: "white",
         border: "none",
-        borderRadius: "5px",
+        borderRadius: "8px",
         cursor: "pointer",
     },
     deleteButtonImage: {
