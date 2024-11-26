@@ -12,6 +12,8 @@ import OfferPage from "./pages/OfferPage";
 import Footer from './components/Footer';
 import Product from './pages/Product'
 import Cart from './pages/Cart'
+import Home from './components/Home';
+
 import './App.css';
 
 function App() {
@@ -20,11 +22,13 @@ function App() {
       <header>{<Header />}</header>
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<AdminProfile />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/adding-product" element={<AddProduct />} />
+
+          <Route path="/" element={<Home/>}/>
+          <Route path="/login" element={<LoginForm/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/profile" element={<AdminProfile/>}/>
+          <Route path="/catalog" element={<Catalog/>}/>
+          <Route path="/adding-product" element={<AddProduct/>}/>
           <Route path="/edit-product/:id" element={<EditProduct />} />
           <Route path="/lanzamientos" element={<LaunchPage />} />
           <Route path="/ofertas" element={<OfferPage />} />

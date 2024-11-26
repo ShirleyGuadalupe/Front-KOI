@@ -1,42 +1,78 @@
 .footer-container {
-    background-color: #000; /* Negro */
-    color: #fff; /* Blanco */
-    text-align: center;
-    font-size: small;
-    padding: 50px;
+  background-color: #000; /* Negro */
+  color: #fff; /* Blanco */
+  text-align: center;
+  font-size: small;
+  padding: 40px 20px;
+}
 
-  }
-  
+.footer-content,
+.footer-mission,
+.footer-vision {
+  margin: 40px auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.footer-content img.flag {
+  width: 50px; /* Tamaño ajustado para bandera */
+}
+
+.footer-mission p,
+.footer-vision p {
+  line-height: 1.6;
+  text-align: justify; /* Mejora la lectura */
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-bottom p {
+  margin-bottom: 15px;
+}
+
+.footer-bottom .logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-bottom .logos img.logo {
+  width: 70px; /* Ajustar tamaño para logos */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
   .footer-content,
   .footer-mission,
   .footer-vision {
-    padding-right: 400px;
-    padding-left: 400px;
-    margin-top: 70px;
+    padding: 0 15px;
   }
-  
+
   .footer-content img.flag {
-    width: 70px; /* Tamaño de la bandera */
+    width: 40px;
   }
-  
-  .footer-mission p,
-  .footer-vision p {
-    line-height: 1.5;
-  }
-  
-  .footer-bottom {
-    margin-top: 70px;
-    justify-content: left;
-  }
-  
-  .footer-bottom .logos {
-    display: flex;
-    justify-content: right;
-    gap: 15px;
-    margin-top: 10px;
-  }
-  
+
   .footer-bottom .logos img.logo {
-    width: 80px; /* Ajustar según el tamaño del logo */
+    width: 60px;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .footer-content,
+  .footer-mission,
+  .footer-vision {
+    margin: 20px auto;
+    font-size: 0.9rem;
+  }
+
+  .footer-content img.flag,
+  .footer-bottom .logos img.logo {
+    width: 50px;
+  }
+}

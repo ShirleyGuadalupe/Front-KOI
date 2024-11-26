@@ -7,7 +7,6 @@ const handleLogout = () => {
 
 const Header = () => {
   const isLoggedIn = localStorage.getItem("token");
-  const isAdmin = localStorage.getItem("user");
 
   return (
     <header>

@@ -43,10 +43,12 @@ const LoginForm = () => {
       localStorage.setItem("departamento", data.user.departamento);
       localStorage.setItem("id",data.user.id);
       window.location.reload()
+      
 
       setTimeout(() => {
         if (data.token) {
           navigate("/profile");
+          window.location.reload()
         }
       }, 1);
     } catch (error) {

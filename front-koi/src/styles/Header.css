@@ -1,123 +1,177 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .top-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   background-color: #cfcfcf;
   padding: 10px 20px;
 }
 
+.top-bar div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px; /* Espaciado consistente */
+}
+
+img.social-icons {
+  height: 30px; /* Tamaño reducido pero legible */
+  width: 30px;
+  margin: 5px;
+}
+
+a.btn-bar,
+a.btn-bar-login {
+  margin: 5px;
+  padding: 7px 15px; /* Espaciado adaptativo */
+  text-decoration: none;
+  color: white;
+  border-radius: 100px;
+  font-size: 14px;
+  text-align: center;
+}
+
+a.btn-bar {
+  background-color: black;
+}
+
+a.btn-bar-login {
+  background-color: rgb(212, 0, 0);
+}
+
+/* Header Container */
+.header-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #000;
+}
+
+.logo-container {
+  flex: 1;
+  text-align: center;
+}
+
+.logo {
+  max-height: 80px;
+  width: auto;
+}
+
+.main-nav {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+}
+
 ul.horizontal-list {
-    list-style: none;
-    text-align: center;
-  }
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
 
 ul.horizontal-list li {
-    display: inline-block;
-    padding: 0px 30px;
-    text-align: center;
-    
-  }
-.header-container {
-    margin: 0px 0px 40px;
-    padding: 20px;
-    background-color: #000000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  text-align: center;
+}
 
 a.letters {
   color: white;
   text-decoration: none;
-  }
+  font-size: 16px;
+}
 
-img.social-icons {
-    height:40px;
-    width:40px;
-    margin: 10px;
-  }
-  
-a.btn-bar {
-    margin-left: 15px;
-    padding: 5px 10px;
-    text-decoration: none;
-    background-color: black;
-    color: white;
-    border-radius: 100px;
-  }
-  
-a.btn-bar-login {
-    margin-left: 15px;
-    padding: 5px 10px;
-    text-decoration: none;
-    background-color: rgb(212, 0, 0);
-    color: white;
-    border-radius: 100px;
-  }
-  
+/* Header Actions */
+.header-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
 
-.main-nav {
-    background-color: black;
-  }
-  
-ul.main-nav {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-a.main-nav {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-  }
+.icon {
+  width: 40px;
+  height: 40px;
+}
 
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #cfcfcf;
-  }
-  
+/* Responsive Styles */
+@media (max-width: 1024px) {
   .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #000;
-    color: white;
+    padding: 10px 15px;
   }
-  
-  .logo-container {
-    flex: 0.3;
-  }
-  
+
   .logo {
-    height: 100px; /* Ajusta según sea necesario */
+    max-height: 70px;
   }
-  
-  .main-nav {
-    flex: 2;
-  }
-  
+
   ul.horizontal-list {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+    gap: 15px;
   }
-  
-  .horizontal-list .letters {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .header-actions {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-  }
-  
+
   .icon {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
   }
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  ul.horizontal-list {
+    gap: 10px;
+  }
+
+  a.letters {
+    font-size: 14px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-height: 60px;
+  }
+
+  a.letters {
+    font-size: 12px;
+  }
+
+  a.btn-bar,
+  a.btn-bar-login {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  img.social-icons {
+    height: 25px;
+    width: 25px;
+  }
+
+  ul.horizontal-list {
+    gap: 8px;
+  }
+}
