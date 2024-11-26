@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ChromePicker } from 'react-color'; // Importamos el color picker
+import { ChromePicker } from "react-color"; // Importamos el color picker
 import "../styles/AdminProfile.css";
 
 const AdminProfile = () => {
@@ -20,7 +20,6 @@ const AdminProfile = () => {
   const ciudad = localStorage.getItem("ciudad");
   const departamento = localStorage.getItem("departamento");
 
-
   useEffect(() => {
     fetchCollections();
     fetchSubCollections();
@@ -29,8 +28,9 @@ const AdminProfile = () => {
   }, []);
 
   const fetchSubCollections = async () => {
-
-    const response = await fetch("https://api-koi-production.up.railway.app/api/sub-colecciones");
+    const response = await fetch(
+      "https://api-koi-production.up.railway.app/api/sub-colecciones"
+    );
 
     const data = await response.json();
     setSubCollections(data);
@@ -64,14 +64,17 @@ const AdminProfile = () => {
   const addColor = async () => {
     const token = localStorage.getItem("token");
     if (selectedColor) {
-      const response = await fetch("https://api-koi-production.up.railway.app/api/colores", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ hex: selectedColor }),
-      });
+      const response = await fetch(
+        "https://api-koi-production.up.railway.app/api/colores",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ hex: selectedColor }),
+        }
+      );
       if (response.ok) {
         fetchColors(); // Refrescar la lista de colores
         setIsColorPickerOpen(false); // Cerrar el color picker
@@ -203,16 +206,21 @@ const AdminProfile = () => {
   const updateColor = async (id) => {
     const token = localStorage.getItem("token");
 
-    const hex = prompt("Ingrese el nuevo color en formato hexadecimal (ej: #FF5733):");
+    const hex = prompt(
+      "Ingrese el nuevo color en formato hexadecimal (ej: #FF5733):"
+    );
     if (hex && /^#([0-9A-F]{3}){1,2}$/i.test(hex)) {
-      const response = await fetch(`https://api-koi-production.up.railway.app/api/colores/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ hex }),
-      });
+      const response = await fetch(
+        `https://api-koi-production.up.railway.app/api/colores/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ hex }),
+        }
+      );
       if (response.ok) {
         fetchColors(); // Refrescar lista de colores
       } else {
@@ -223,16 +231,18 @@ const AdminProfile = () => {
     }
   };
 
-
   // Delete Color
   const deleteColor = async (id) => {
     const token = localStorage.getItem("token");
-    const response = await fetch(`https://api-koi-production.up.railway.app/api/colores/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `https://api-koi-production.up.railway.app/api/colores/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (response.ok) {
       fetchColors(); // Refrescar lista de colores
@@ -275,15 +285,17 @@ const AdminProfile = () => {
     const nombre = prompt("Ingrese el nuevo nombre de la categoría:");
     const precio = prompt("Ingrese el nuevo precio de la categoría:");
     if (nombre && precio && !isNaN(precio)) {
-
-      const response = await fetch(`https://api-koi-production.up.railway.app/api/tipo/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ nombre, precio: parseFloat(precio) }),
-      });
+      const response = await fetch(
+        `https://api-koi-production.up.railway.app/api/tipo/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ nombre, precio: parseFloat(precio) }),
+        }
+      );
 
       if (response.ok) {
         fetchCategories(); // Refrescar lista de categorías
@@ -299,12 +311,15 @@ const AdminProfile = () => {
   const deleteCategory = async (id) => {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`https://api-koi-production.up.railway.app/api/tipo/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `https://api-koi-production.up.railway.app/api/tipo/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (response.ok) {
       fetchCategories(); // Refrescar lista de categorías
@@ -317,14 +332,14 @@ const AdminProfile = () => {
     <div className="admin-profile-container">
       <h1 className="title">MI PERFIL</h1>
 
-
       {isLoggedIn && (
-        <div className="profile-container">
-          <div className="profile-card">
-            <div className="profile-info">
-              <h2>{username}</h2>
+        <div className="section">
+          <div>
+            <div>
+              <h2 className="name">✨¡Bienvenido!✨</h2>
+              <h2 className="name">{username}</h2>
               <p>
-                <strong>Email:</strong> {email}
+                <strong >Email:</strong> {email}
               </p>
               <p>
                 <strong>Teléfono:</strong> {telefono}
@@ -346,13 +361,13 @@ const AdminProfile = () => {
       {isAdmin === "true" && (
         <div>
           {/* Colecciones */}
+          <h2 className="title">COLECCIONES</h2>
           <div className="section">
-            <h2>Colecciones</h2>
             <ul className="list">
               {collections.map((collection) => {
                 return (
                   <li key={collection.id}>
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center"}}>
                       <button
                         className={`toggle-btn ${isOpen ? "open" : ""}`}
                         onClick={() => setIsOpen(!isOpen)}
@@ -361,16 +376,16 @@ const AdminProfile = () => {
                       </button>
                       <strong>{collection.nombre}</strong>
                     </div>
-                    <button onClick={() => updateCollection(collection.id)}>
+                    <button className="btn-update" onClick={() => updateCollection(collection.id)}>
                       ✏️
                     </button>
-                    <button onClick={() => deleteCollection(collection.id)}>
+                    <button className="btn-delete" onClick={() => deleteCollection(collection.id)}>
                       🗑️
                     </button>
-                    <button onClick={() => addSubCollection(collection.id)}>
-                      ➕ SubColección
+                    <button className="btn-add" onClick={() => addSubCollection(collection.id)}>
+                      ➕
                     </button>
-
+                    
                     {/* Subcolecciones */}
                     <ul className={`sublist ${isOpen ? "open" : ""}`}>
                       {subCollections
@@ -378,12 +393,15 @@ const AdminProfile = () => {
                         .map((sub) => (
                           <li key={sub.id}>
                             {sub.nombre}
-                            <button onClick={() => updateSubCollection(sub.id)}>
+                            <div>
+                            <button className="btn-update" onClick={() => updateSubCollection(sub.id)}>
                               ✏️
                             </button>
-                            <button onClick={() => deleteSubCollection(sub.id)}>
+                            <button className="btn-delete" onClick={() => deleteSubCollection(sub.id)}>
                               🗑️
                             </button>
+                            </div>
+                            
                           </li>
                         ))}
                     </ul>
@@ -392,70 +410,69 @@ const AdminProfile = () => {
               })}
             </ul>
             <button className="add-btn" onClick={addCollection}>
-              Añadir colección ➕
+              Añadir Colección ➕
             </button>
           </div>
 
           {/* Colores */}
-      <div className="section">
-        <h2>Colores</h2>
-        <div className="colors">
-          {colors.map((color) => (
-            <div key={color.id} className="color-box-container">
-              <div
-                style={{ backgroundColor: color.hex }}
-                className="color-box"
-              />
-              <button onClick={() => updateColor(color.id)}>✏️</button>
-              <button onClick={() => deleteColor(color.id)}>🗑️</button>
+          <h2 className="title">COLORES</h2>
+          <div className="section">
+            <div className="colors">
+              {colors.map((color) => (
+                <div key={color.id} className="color-box-container">
+                  <div
+                    style={{ backgroundColor: color.hex }}
+                    className="color-box"
+                  />
+                  <button className="btn-update" onClick={() => updateColor(color.id)}>✏️</button>
+                  <button className="btn-delete" onClick={() => deleteColor(color.id)}>🗑️</button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <button className="add-btn" onClick={toggleColorPicker}>
-          Añadir color ➕
-        </button>
-
-        {/* Color Picker */}
-        {isColorPickerOpen && (
-          <div className="color-picker-container">
-            <ChromePicker
-              color={selectedColor}
-              onChangeComplete={handleColorChange}
-            />
-            <button onClick={addColor} className="confirm-color-btn">
-              Confirmar Color
+            <button className="add-btn" onClick={toggleColorPicker}>
+              Añadir Color ➕
             </button>
+
+            {/* Color Picker */}
+            {isColorPickerOpen && (
+              <div className="color-picker-container">
+                <ChromePicker
+                  color={selectedColor}
+                  onChangeComplete={handleColorChange}
+                />
+                <button onClick={addColor} className="confirm-color-btn">
+                  Confirmar Color
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
           {/* Categorías */}
+          <h2 className="title">CATEGORÍAS</h2>
           <div className="section">
-            <h2>Categorías</h2>
             <div className="categories">
               {categories.map((category) => (
                 <div key={category.id} className="category-container">
                   <span>
                     {category.nombre} (${category.precio})
                   </span>
-                  <button onClick={() => updateCategory(category.id)}>
+                  <button className="btn-update" onClick={() => updateCategory(category.id)}>
                     ✏️
                   </button>
-                  <button onClick={() => deleteCategory(category.id)}>
+                  <button className="btn-delete" onClick={() => deleteCategory(category.id)}>
                     🗑️
                   </button>
                 </div>
               ))}
             </div>
             <button className="add-btn" onClick={addCategory}>
-              Añadir categoría ➕
+              Añadir Categoría  ➕
             </button>
           </div>
 
-
           {/* Tallas */}
+          <h2 className="title">TALLAS</h2>
           <div className="section">
-            <h2>Tallas</h2>
             <div className="sizes">
               {["S", "M", "L", "XL"].map((size) => (
                 <span key={size} className="size">

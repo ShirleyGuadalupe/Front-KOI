@@ -77,7 +77,7 @@ const Header = () => {
         <div className="logo-container">
           <a href="/">
             <img
-              src="https://i.ibb.co/NjH0d6K/LOGO.jpg"
+              src="https://i.ibb.co/6rnXzZb/Logo-blanco-03.png"
               alt="Koi Logo"
               className="logo"
             />

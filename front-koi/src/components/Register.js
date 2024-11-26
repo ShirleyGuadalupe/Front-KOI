@@ -33,7 +33,7 @@ const Register = () => {
     }
 
     if (formData.email !== formData.confirmemail) {
-      setError('Las contraseñas no coinciden');
+      setError('Los emails no coinciden');
       setMessage('');
       return;
     }
