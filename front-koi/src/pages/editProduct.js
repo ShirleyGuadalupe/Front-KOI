@@ -21,6 +21,17 @@ const EditProduct = () => {
     const [selectedColor, setSelectedColor] = useState(null);
     const [message, setMessage] = useState('');
     const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+
+    // Función para manejar cuando el mouse entra en una imagen
+    const handleMouseEnter = (index) => {
+        setHoveredIndex(index);
+    };
+
+    // Función para manejar cuando el mouse sale de una imagen
+    const handleMouseLeave = () => {
+        setHoveredIndex(null);
+    };
     useEffect(() => {
         fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}`)
             .then((response) => response.json())
@@ -195,11 +206,28 @@ const EditProduct = () => {
                 console.error('Error al actualizar el producto:', error);
             });
     };
-
+    const deleteImage = async (idImagen) => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`https://api-koi-production.up.railway.app/api/camisetas/imagenes/${idImagen}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!response.ok) throw new Error("Error al eliminar el producto del carrito");
+            setMessage('Imagen Eliminada Correctamente')
+            setIsPopupVisible(true);
+            setTimeout(() => {
+                setIsPopupVisible(false);
+            }, 3000);
+            //fetchCart(); // Actualizar el carrito después de eliminar
+            window.location.reload();
+        } catch (error) {
+            console.error("Error al eliminar el producto del carrito:", error);
+        }
+    };
     if (loading) {
         return <div>Cargando...</div>;
     }
-
     return (
         <div style={styles.container}>
             <form onSubmit={handleSubmitProduct} style={styles.form}>
@@ -303,12 +331,22 @@ const EditProduct = () => {
                     ) : (
                         <div style={styles.imageGrid}>
                             {images.map((image, index) => (
-                                <div key={index} style={styles.imageContainer}>
+                                <div key={index} style={styles.imageContainer} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
                                     <img
                                         src={image.url}
                                         alt={`Image ${index + 1}`}
                                         style={styles.imagePreview}
                                     />
+                                    {hoveredIndex === index && (
+                                        <div style={styles.closeButton} >
+                                            <img
+                                                src="https://i.ibb.co/zFjn8wQ/boton-x-1.png"
+                                                alt="Close"
+                                                style={styles.closeIcon}
+                                                onClick={ () =>deleteImage(image.id)}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -450,6 +488,7 @@ const styles = {
         width: '150px',
         height: '150px',
         overflow: 'hidden',
+        position:"relative",
     },
     input: {
         padding: '10px',
@@ -509,6 +548,7 @@ const styles = {
         maxWidth: '100%',
         maxHeight: '100%',
         borderRadius: '8px',
+        position: 'relative',
     },
     addIcon: {
         fontSize: '40px',
@@ -534,6 +574,17 @@ const styles = {
     fileInput: {
         display: 'none',
     },
+    closeButton: {
+        position: 'absolute',
+        top: '2px',
+        left: '2px',
+        cursor: 'pointer',
+        zIndex: 1000,
+      },
+      closeIcon: {
+        width: '15px',
+        height: '15px',
+      },
 };
 
 export default EditProduct;
