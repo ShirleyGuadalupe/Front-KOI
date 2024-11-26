@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Header.css";
 
 const handleLogout = () => {
@@ -7,6 +7,29 @@ const handleLogout = () => {
 
 const Header = () => {
   const isLoggedIn = localStorage.getItem("token");
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    // Simular llamada a la API para obtener colecciones y subcolecciones
+    const fetchCollections = async () => {
+      const data = [
+        {
+          name: "Anime",
+          subcollections: ["Naruto", "One Piece", "Attack on Titan"],
+        },
+        {
+          name: "Videojuegos",
+          subcollections: ["Zelda", "Mario", "Halo"],
+        },
+        {
+          name: "Música",
+          subcollections: ["Rock", "Pop", "Electrónica"],
+        },
+      ];
+      setCollections(data);
+    };
+    fetchCollections();
+  }, []);
 
   return (
     <header>
@@ -90,10 +113,34 @@ const Header = () => {
                 LANZAMIENTO
               </a>
             </li>
-            <li>
-              <a className="letters" href="/catalog">
+            <li className="dropdown">
+              <a className="letters" href="#">
                 COLECCIONES
               </a>
+              <ul className="dropdown-menu">
+                {collections.map((collection) => (
+                  <li key={collection.name} className="dropdown-item">
+                    <a
+                      href={`/colecciones/${collection.name.toLowerCase()}`}
+                      className="collection-link"
+                    >
+                      {collection.name}
+                    </a>
+                    <ul className="sub-dropdown-menu">
+                      {collection.subcollections.map((sub) => (
+                        <li key={sub}>
+                          <a
+                            href={`/colecciones/${collection.name.toLowerCase()}/${sub.toLowerCase()}`}
+                            className="subcollection-link"
+                          >
+                            {sub}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
             </li>
             <li>
               <a className="letters" href="/catalog">
