@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const CatalogPage = () => {
   const [launchProducts, setLaunchProducts] = useState([]);
   const [offerProducts, setOfferProducts] = useState([]);
+  const [all, setAll] = useState([]);
   const [loading, setLoading] = useState(true);
   const isAdmin = localStorage.getItem('user');
   const handleDelete = (productId) => {
@@ -15,14 +16,17 @@ const CatalogPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const allResponse = await fetch("https://api-koi-production.up.railway.app/api/camisetas")
         const launchResponse = await fetch("https://api-koi-production.up.railway.app/api/camisetas/lanzamiento");
         const offerResponse = await fetch("https://api-koi-production.up.railway.app/api/camisetas/oferta");
 
         const launchData = await launchResponse.json();
         const offerData = await offerResponse.json();
+        const allData = await allResponse.json();
 
         setLaunchProducts(launchData);
         setOfferProducts(offerData);
+        setAll(allData);
       } catch (error) {
         console.error("Error al obtener los productos:", error);
       } finally {
@@ -42,7 +46,7 @@ const CatalogPage = () => {
       {/* <h1 style={styles.title}>Catálogo</h1> */}
 
       {/* Productos de Lanzamiento */}
-      <h2 style={styles.subTitle}>Lanzamientos</h2>
+      <h2 style={styles.subTitle}>LANZAMIENTO</h2>
       <div style={styles.grid}>
         {launchProducts.length > 0 ? (
           launchProducts.map((product) => (
@@ -57,7 +61,7 @@ const CatalogPage = () => {
         <Link to="/lanzamientos" style={styles.link}>Ver más lanzamientos</Link>
       </div>
       {/* Productos de Ofertas */}
-      <h2 style={styles.subTitle}>Ofertas</h2>
+      <h2 style={styles.subTitle}>OFERTAS</h2>
       <div style={styles.grid}>
         {offerProducts.length > 0 ? (
           offerProducts.map((product) => (
@@ -73,6 +77,19 @@ const CatalogPage = () => {
       {/* Enlaces para ver más productos */}
       <div style={styles.links}>
         <Link to="/ofertas" style={styles.link}>Ver más ofertas</Link>
+      </div>
+      {/* Productos de Ofertas */}
+      <h2 style={styles.subTitle}>TODOS NUESTROS PRODUCTOS</h2>
+      <div style={styles.grid}>
+        {all.length > 0 ? (
+          all.map((product) => (
+            <ProductCard key={product.id} product={product} onDelete={handleDelete}/>
+          ))
+        ) : (
+          <div>No hay productos de oferta disponibles.</div>
+        )}
+        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
+        
       </div>
     </div>
   );

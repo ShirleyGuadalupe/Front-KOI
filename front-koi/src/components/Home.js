@@ -65,7 +65,7 @@ const HomePage = () => {
           <p>Cargando imágenes...</p>
         )}
       </div>
-        <CatalogPage/>
+        
       {/* Sección inferior */}
       <div className="features">
         <div className="feature-item">
@@ -84,6 +84,7 @@ const HomePage = () => {
           <span>Entregas a todo el país Colombia</span>
         </div>
       </div>
+      <CatalogPage/>
     </div>
   );
 };
