@@ -413,7 +413,7 @@ const EditProduct = () => {
                 <button onClick={handleAddColor} style={styles.submitButton}>
                     Agregar Color
                 </button>
-                <Link to="/profile-admin" >Crear Colores</Link>
+                <Link to="/profile" >Crear Colores</Link>
             </div>
             {isPopupVisible && (
                 <div className="popup">
