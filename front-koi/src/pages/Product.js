@@ -264,7 +264,7 @@ const styles = {
     },
     mainImage: {
         width: "100%",
-        maxWidth: "500px",
+        maxWidth: "650px",
         borderRadius: "10px",
     },
     thumbnailContainer: {

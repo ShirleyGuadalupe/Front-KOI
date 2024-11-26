@@ -39,7 +39,7 @@ const CatalogPage = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Catálogo</h1>
+      {/* <h1 style={styles.title}>Catálogo</h1> */}
 
       {/* Productos de Lanzamiento */}
       <h2 style={styles.subTitle}>Lanzamientos</h2>

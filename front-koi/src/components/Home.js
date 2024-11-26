@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Home.css';
-
+import CatalogPage from '../pages/Catalog';
 const HomePage = () => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,7 +35,7 @@ const HomePage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Cambiar cada 5 segundos
+    }, 10000); // Cambiar cada 5 segundos
     return () => clearInterval(interval);
   }, [images]);
 
@@ -65,7 +65,7 @@ const HomePage = () => {
           <p>Cargando imágenes...</p>
         )}
       </div>
-
+        <CatalogPage/>
       {/* Sección inferior */}
       <div className="features">
         <div className="feature-item">
