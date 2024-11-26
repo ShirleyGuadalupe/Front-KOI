@@ -3,6 +3,8 @@ import "../styles/LoginForm.css";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const [message, setMessage] = useState('');
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -29,7 +31,13 @@ const LoginForm = () => {
       );
 
       if (!response.ok) {
+        setMessage("Credenciales incorrectas, Intente de nuevo");
+        setIsPopupVisible(true);
+        setTimeout(() => {
+          setIsPopupVisible(false);
+        }, 3000);
         throw new Error("Error en el registro");
+
       }
       const data = await response.json();
       console.log("Login exitoso:", data);
@@ -41,9 +49,9 @@ const LoginForm = () => {
       localStorage.setItem("direccion", data.user.direccion);
       localStorage.setItem("ciudad", data.user.ciudad);
       localStorage.setItem("departamento", data.user.departamento);
-      localStorage.setItem("id",data.user.id);
+      localStorage.setItem("id", data.user.id);
       window.location.reload()
-      
+
 
       setTimeout(() => {
         if (data.token) {
@@ -87,6 +95,11 @@ const LoginForm = () => {
       <p className="parrafo">
         ¿No tienes una cuenta? <a href="/register">Crea una</a>
       </p>
+      {isPopupVisible && (
+                <div className={`popupError`}>
+                    {message}
+                </div>
+            )}
     </div>
   );
 };
