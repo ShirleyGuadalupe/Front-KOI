@@ -47,56 +47,70 @@ const Cart = () => {
             console.error(`Error al cargar imágenes del producto ${productId}:`, error);
         }
     };
+    const fetchCart = async () => {
+        try {
+            const response = await fetch("https://api-koi-production.up.railway.app/api/carrito", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
 
+            if (!response.ok) {
+                throw new Error("Error al obtener el carrito");
+            }
+
+            const data = await response.json();
+            setCart(data); // Actualizar datos del carrito
+        } catch (error) {
+            console.error("Error al cargar el carrito:", error);
+            setCart(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchTipoCamisa = async () => {
+        try {
+            const response = await fetch("https://api-koi-production.up.railway.app/api/tipo", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Error al obtener los tipos de camisa");
+            }
+
+            const data = await response.json();
+            const map = {};
+            data.forEach((tipo) => {
+                map[tipo.id] = tipo.nombre; // Crear un mapa de ID a nombre
+            });
+            setTipoCamisaMap(map);
+        } catch (error) {
+            console.error("Error al cargar tipos de camisa:", error);
+        }
+    };
+    const deleteItem = async (idItem) => {
+        try {
+            const response = await fetch(`https://api-koi-production.up.railway.app/api/carrito/${idItem}`, {
+                method: "DELETE",
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!response.ok) throw new Error("Error al eliminar el producto del carrito");
+            setMessage('Eliminado correctamente del carrito de Compras')
+            setIsPopupVisible(true);
+            setTimeout(() => {
+                setIsPopupVisible(false);
+            }, 3000);
+            fetchCart(); // Actualizar el carrito después de eliminar
+        } catch (error) {
+            console.error("Error al eliminar el producto del carrito:", error);
+        }
+    };
     useEffect(() => {
-        const fetchCart = async () => {
-            try {
-                const response = await fetch("https://api-koi-production.up.railway.app/api/carrito", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error("Error al obtener el carrito");
-                }
-
-                const data = await response.json();
-                setCart(data); // Actualizar datos del carrito
-            } catch (error) {
-                console.error("Error al cargar el carrito:", error);
-                setCart(null);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        const fetchTipoCamisa = async () => {
-            try {
-                const response = await fetch("https://api-koi-production.up.railway.app/api/tipo", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error("Error al obtener los tipos de camisa");
-                }
-
-                const data = await response.json();
-                const map = {};
-                data.forEach((tipo) => {
-                    map[tipo.id] = tipo.nombre; // Crear un mapa de ID a nombre
-                });
-                setTipoCamisaMap(map);
-            } catch (error) {
-                console.error("Error al cargar tipos de camisa:", error);
-            }
-        };
-
-        // Llamadas iniciales
         fetchCart();
         fetchTipoCamisa();
     }, [token]);
@@ -121,7 +135,10 @@ const Cart = () => {
     }
 
     if (!cart || !cart.items || cart.items.length === 0) {
-        return <div style={styles.emptyCart}>Tu carrito está vacío.</div>;
+        return <div style={styles.emptyCart}>
+            Tu carrito está vacío.
+            <div><img src="https://i.ibb.co/xmB6NYN/11329060.png" /> </div>
+        </div>;
     }
 
     return (
@@ -157,6 +174,19 @@ const Cart = () => {
                             </div>
                             <p>Cantidad: {item.cantidad}</p>
                             <p>Precio Unitario: ${item.precio.toLocaleString()}</p>
+                            <div>
+                                <button
+                                    style={styles.deleteButton}
+                                    onClick={() => deleteItem(item.id)}
+                                    title="Eliminar producto"
+                                >
+                                    <img
+                                        src="https://i.ibb.co/qNT5fZ0/close-icon.png"
+                                        alt="Eliminar"
+                                        style={styles.deleteButtonImage}
+                                    />Eliminar Producto
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -167,6 +197,11 @@ const Cart = () => {
                 <h2>Total: ${cart.totalPrice.toLocaleString()}</h2>
                 <button style={styles.checkoutButton}>Finalizar Compra</button>
             </div>
+            {isPopupVisible && (
+                <div className={`popup`}>
+                    {message}
+                </div>
+            )}
         </div>
     );
 };
@@ -187,7 +222,7 @@ const styles = {
     itemsContainer: {
         borderTop: "1px solid #ddd",
         marginBottom: "20px",
-        alignItems:"center"
+        alignItems: "center"
     },
     item: {
         display: "flex",
@@ -250,9 +285,21 @@ const styles = {
     },
     emptyCart: {
         textAlign: "center",
-        fontSize: "18px",
+        fontSize: "50px",
         color: "#999",
         marginTop: "50px",
+    },
+    deleteButton: {
+        padding: "5px 10px",
+        backgroundColor: "red",
+        color: "white",
+        border: "none",
+        borderRadius: "5px",
+        cursor: "pointer",
+    },
+    deleteButtonImage: {
+        width: "15px", // Tamaño personalizado para la imagen
+        height: "15px",
     },
 };
 
