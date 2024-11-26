@@ -51,8 +51,8 @@ a.btn-bar-login {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
   background-color: #000;
+  padding-right: 40px;
 }
 
 .logo-container {
@@ -61,7 +61,7 @@ a.btn-bar-login {
 }
 
 .logo {
-  max-height: 200px;
+  max-height: 120px;
   width: auto;
 }
 
@@ -111,7 +111,7 @@ a.letters {
   }
 
   .logo {
-    max-height: 90px;
+    max-height: 70px;
   }
 
   ul.horizontal-list {
@@ -153,7 +153,7 @@ a.letters {
 
 @media (max-width: 480px) {
   .logo {
-    max-height: 90px;
+    max-height: 80px;
   }
 
   a.letters {

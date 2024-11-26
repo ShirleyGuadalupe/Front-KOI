@@ -100,7 +100,7 @@ const styles = {
     
   },
   image: {
-    width: "100%",
+    width:"100%",
     borderRadius: "4px",
     marginBottom: "8px",
     cursor:"pointer",
