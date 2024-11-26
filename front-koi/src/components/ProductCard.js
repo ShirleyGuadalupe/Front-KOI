@@ -49,12 +49,15 @@ const ProductCard = ({ product, onDelete }) => {
       console.error("Error al eliminar la camiseta:", error);
     }
   };
+  const redirigir = () => {
+    navigate(`/product/${product.id}`);  // Redirige a la ruta "/nueva-pagina"
+  };
 
   return (
-    <div style={styles.card}>
+    <div style={styles.card} >
       {/* Si hay una imagen, la mostramos */}
       {image ? (
-        <img src={image} alt={product.name} style={styles.image} />
+        <img src={image} alt={product.name} style={styles.image} onClick={redirigir}/>
       ) : (
         <div style={styles.imagePlaceholder}>Imagen no disponible</div> // Si no hay imagen, mostramos un mensaje de placeholder
       )}
@@ -94,11 +97,13 @@ const styles = {
     backgroundColor: "#fff",
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
     maxWidth: "200px",
+    
   },
   image: {
     width: "100%",
     borderRadius: "4px",
     marginBottom: "8px",
+    cursor:"pointer",
   },
   imagePlaceholder: {
     width: "100%",
