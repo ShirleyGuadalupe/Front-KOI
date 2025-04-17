@@ -13,8 +13,7 @@ import Footer from './components/Footer';
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Home from './components/Home';
-
-import './App.css';
+import "../src/App.css"
 
 function App() {
   return (
