@@ -1,7 +1,6 @@
 /* General Styles */
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Verdana";
 }
 
 .top-bar {
@@ -48,41 +47,39 @@ a.btn-bar-login {
 /* Header Container */
 .header-container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   background-color: #000;
-  padding-right: 40px;
+  padding: 0px;
 }
 
 .logo-container {
-  flex: 1;
-  text-align: center;
+  align-items: center;
+  margin: auto;
 }
 
 .logo {
-  max-height: 120px;
+  margin: auto;
+  max-height: 160px;
   width: auto;
 }
 
 .main-nav {
-  flex: 2;
-  display: flex;
+  flex: 1;
   justify-content: center;
 }
 
 ul.horizontal-list {
   list-style: none;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
+  justify-content:space-evenly;
+  gap: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 ul.horizontal-list li {
-  text-align: center;
+  text-align: auto;
 }
 
 a.letters {
@@ -93,87 +90,15 @@ a.letters {
 
 /* Header Actions */
 .header-actions {
-  flex: 1;
+  flex: 0.2;
   display: flex;
-  justify-content: flex-end;
-  gap: 15px;
+  justify-content:center;
+  gap: 50px;
 }
 
 .icon {
   width: 40px;
   height: 40px;
-}
-
-/* Responsive Styles */
-@media (max-width: 1024px) {
-  .header-container {
-    padding: 10px 15px;
-  }
-
-  .logo {
-    max-height: 70px;
-  }
-
-  ul.horizontal-list {
-    gap: 15px;
-  }
-
-  .icon {
-    width: 35px;
-    height: 35px;
-  }
-}
-
-@media (max-width: 768px) {
-  .top-bar {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .header-container {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-
-  ul.horizontal-list {
-    gap: 10px;
-  }
-
-  a.letters {
-    font-size: 14px;
-  }
-
-  .icon {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    max-height: 80px;
-  }
-
-  a.letters {
-    font-size: 12px;
-  }
-
-  a.btn-bar,
-  a.btn-bar-login {
-    font-size: 12px;
-    padding: 5px 10px;
-  }
-
-  img.social-icons {
-    height: 25px;
-    width: 25px;
-  }
-
-  ul.horizontal-list {
-    gap: 8px;
-  }
 }
 
 .dropdown {

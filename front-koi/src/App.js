@@ -13,9 +13,9 @@ import Footer from './components/Footer';
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Home from './components/Home';
+import "../src/App.css"
 import Coleccion from './pages/Coleccion';
 import SubColeccion from './pages/Subcoleccion';
-import './App.css';
 
 function App() {
   return (

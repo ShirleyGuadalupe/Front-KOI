@@ -69,8 +69,8 @@ const LoginForm = () => {
       <h2 className="bienvenidos">BIENVENIDO</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
-          <label htmlFor="email">CORREO ELECTRÓNICO</label>
           <input
+            placeholder="Correo Electrónico"
             type="email"
             name="email"
             value={formData.email}
@@ -79,8 +79,8 @@ const LoginForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">CONTRASEÑA</label>
           <input
+            placeholder="Contraseña"
             type="password"
             name="password"
             value={formData.password}
@@ -93,7 +93,7 @@ const LoginForm = () => {
         </button>
       </form>
       <p className="parrafo">
-        ¿No tienes una cuenta? <a href="/register">Crea una</a>
+        ¿No tienes una cuenta? <a className="parrafo" href="/register"> Crea una</a>
       </p>
       {isPopupVisible && (
                 <div className={`popupError`}>

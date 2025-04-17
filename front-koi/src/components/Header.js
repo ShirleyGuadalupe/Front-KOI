@@ -120,7 +120,7 @@ const Header = () => {
         <nav className="main-nav">
           <ul className="horizontal-list">
             <li>
-              <a className="letters" href="/lanzamientos">
+              <a className="letters" href="/catalog">
                 LANZAMIENTO
               </a>
             </li>
@@ -154,7 +154,7 @@ const Header = () => {
               </ul>
             </li>
             <li>
-              <a className="letters" href="/ofertas">
+              <a className="letters" href="/catalog">
                 OFERTAS
               </a>
             </li>

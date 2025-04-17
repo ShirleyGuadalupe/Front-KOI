@@ -1,20 +1,23 @@
 .login-container {
+    font-family: 'Verdana';
     max-width: 500px;
-    margin: 0 auto;
-    padding: 50px;
-    background-color: #f7f7f7;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    padding: 60px;
+    background-image: "";
+    background-color: #d1cec5;
+    border-radius: 40px;
+    box-shadow: 4px 8px 4px rgba(147, 147, 147, 0.1);
   }
   
   .bienvenidos {
-    padding: 10px;
-    font-family: 'Montserrat', sans-serif;
+    padding: 15px;
+    margin-bottom: 20px;
     font-style: bold;
+    font-size:larger;
     text-align: center;
-    background-color: black;
+    background-color: rgb(35, 6, 6);
     color: #ffffff;
-    border-radius: 10px;
+    border-radius: 15px;
   }
   
   .login-form {
@@ -23,40 +26,39 @@
   }
   
   .form-group {
-    margin: 15px;
-  }
-  
-  .form-group label {
-    font-size: 14px;
-    color: #362121;
+    margin: 20px;
   }
   
   .form-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #350d0d;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   button.btn {
-    padding: 10px;
-    background-color: #dc1f1f;
+    padding: 15px;
+    background-color: #c60000;
     color: white;
-    border: none;
     border-radius: 100px;
     cursor: pointer;
     font-size: 16px;
   }
   
   button.btn:hover {
-    color: white;
-    background-color: #830707;
+    color: rgb(0, 0, 0);
+    background-color: #de8585;
   }
   
   p.parrafo {
+    font-size: 14px;
     text-align: center;
-    margin: 12px;
+    margin-top: 15px;
+  }
+
+  a.parrafo {
+    color:#ef0000;
   }
   .popupError {
     position: fixed;
