@@ -60,5 +60,15 @@
   a.parrafo {
     color:#ef0000;
   }
+  .popupError {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #da3535;
+    color: white;
+    border-radius: 5px;
+    transition: opacity 0.5s;
+}
 
   

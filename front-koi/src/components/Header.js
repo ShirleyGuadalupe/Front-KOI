@@ -12,20 +12,31 @@ const Header = () => {
   useEffect(() => {
     // Simular llamada a la API para obtener colecciones y subcolecciones
     const fetchCollections = async () => {
-      const data = [
-        {
-          name: "Anime",
-          subcollections: ["Naruto", "One Piece", "Attack on Titan"],
-        },
-        {
-          name: "Videojuegos",
-          subcollections: ["Zelda", "Mario", "Halo"],
-        },
-        {
-          name: "Música",
-          subcollections: ["Rock", "Pop", "Electrónica"],
-        },
-      ];
+      const coleccionesResponse = await fetch('https://api-koi-production.up.railway.app/api/colecciones');
+      const subColeccionesResponse = await fetch('https://api-koi-production.up.railway.app/api/sub-colecciones');
+
+      // Parsear las respuestas JSON
+      const colecciones = await coleccionesResponse.json();
+      const subColecciones = await subColeccionesResponse.json();
+
+      // Crear una estructura para los datos combinados
+      const data = colecciones.map(coleccion => {
+        const subcollections = subColecciones
+          .filter(sub => sub.coleccionId === coleccion.id)
+          .map(sub => ({
+            id: sub.id,   // Incluye el id de la subcolección
+            nombre: sub.nombre
+          }));
+
+        return {
+          id: coleccion.id,  // Incluye el id de la colección
+          name: coleccion.nombre,
+          subcollections: subcollections,  // Subcolecciones con su id
+        };
+      });
+
+
+      console.log(data);
       setCollections(data);
     };
     fetchCollections();
@@ -119,21 +130,21 @@ const Header = () => {
               </a>
               <ul className="dropdown-menu">
                 {collections.map((collection) => (
-                  <li key={collection.name} className="dropdown-item">
+                  <li key={collection.id} className="dropdown-item">
                     <a
-                      href={`/colecciones/${collection.name.toLowerCase()}`}
+                      href={`/colecciones/${collection.id}`}  // Usa el id de la colección
                       className="collection-link"
                     >
                       {collection.name}
                     </a>
                     <ul className="sub-dropdown-menu">
                       {collection.subcollections.map((sub) => (
-                        <li key={sub}>
+                        <li key={sub.id}>
                           <a
-                            href={`/colecciones/${collection.name.toLowerCase()}/${sub.toLowerCase()}`}
+                            href={`/colecciones/${collection.id}/${sub.id}`}  // Usa el id de la subcolección
                             className="subcollection-link"
                           >
-                            {sub}
+                            {sub.nombre}  {/* Usamos el nombre de la subcolección */}
                           </a>
                         </li>
                       ))}
