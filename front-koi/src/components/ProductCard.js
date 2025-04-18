@@ -71,7 +71,7 @@ const ProductCard = ({ product, onDelete }) => {
           style={styles.editBtn} 
           onClick={() => navigate(`/edit-product/${product.id}`)} // Navegamos a la ruta de edición
         >
-          ✏️
+         Editar
         </button>
 
         {/* Botón de eliminar: llama a handleDelete para eliminar la camiseta */}
@@ -79,7 +79,7 @@ const ProductCard = ({ product, onDelete }) => {
           style={styles.deleteBtn} 
           onClick={handleDelete} // Llamamos a handleDelete cuando se hace clic
         >
-          🗑️
+          Eliminar
         </button>
       </div>) : (<></>)}
     </div>
@@ -88,12 +88,13 @@ const ProductCard = ({ product, onDelete }) => {
 
 const styles = {
   card: {
+    alignItems:"center",
     border: "1px solid #ddd",
     borderRadius: "8px",
-    padding: "16px",
+    margin: "8px",
+    padding: "18px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     backgroundColor: "#fff",
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
     maxWidth: "200px",
@@ -125,12 +126,14 @@ const styles = {
     margin: "8px 0",
   },
   actions: {
+    alignItems: "center",
     display: "flex",
-    gap: "8px",
+    gap: "10px",
     marginTop: "8px",
   },
   editBtn: {
     backgroundColor: "#f0f0f0",
+    fontSize:"14px",
     border: "none",
     padding: "4px 8px",
     cursor: "pointer",
@@ -138,6 +141,7 @@ const styles = {
   },
   deleteBtn: {
     backgroundColor: "#ffdddd",
+    fontSize:"14px",
     border: "none",
     padding: "4px 8px",
     cursor: "pointer",
