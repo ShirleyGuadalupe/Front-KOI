@@ -7,7 +7,7 @@ const AdminProfile = () => {
   const [subCollections, setSubCollections] = useState([]);
   const [colors, setColors] = useState([]);
   const [categories, setCategories] = useState([]);
-
+  const [sizes, setSizes] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // Estado para mostrar las subcolecciones
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false); // Estado para abrir/cerrar el color picker
   const [selectedColor, setSelectedColor] = useState("#000000"); // El color seleccionado por el usuario
@@ -25,6 +25,7 @@ const AdminProfile = () => {
     fetchSubCollections();
     fetchColors();
     fetchCategories();
+    fetchSizes();
   }, []);
 
   const fetchSubCollections = async () => {
@@ -58,6 +59,13 @@ const AdminProfile = () => {
     );
     const data = await response.json();
     setCategories(data);
+  };
+  const fetchSizes = async () => {
+    const response = await fetch(
+      "https://api-koi-production.up.railway.app/api/talla"
+    );
+    const data = await response.json();
+    setSizes(data);
   };
 
   // Función para añadir un color
@@ -327,7 +335,82 @@ const AdminProfile = () => {
       alert("Error al eliminar la categoría.");
     }
   };
+  // Tallas
 
+  // Add Size
+  const addSizes= async () => {
+    const token = localStorage.getItem("token");
+    const nombre = prompt("Ingrese el nombre de la talla:");
+    if (nombre) {
+      // Validar datos
+      const response = await fetch(
+        "https://api-koi-production.up.railway.app/api/talla",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ nombre}),
+        }
+      );
+      if (response.ok) {
+        fetchSizes(); // Refrescar lista de tallas
+      } else {
+        alert("Error al añadir la Talla.");
+      }
+    } else {
+      alert("Datos inválidos.");
+    }
+  };
+
+  // Update Category
+  const updateSizes = async (id) => {
+    const token = localStorage.getItem("token");
+    const nombre = prompt("Ingrese el nuevo nombre de la categoría:");
+    if (nombre) {
+      const response = await fetch(
+        `https://api-koi-production.up.railway.app/api/talla/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ nombre}),
+        }
+      );
+
+      if (response.ok) {
+        fetchSizes(); // Refrescar lista de Tallas
+      } else {
+        alert("Error al actualizar la Talla.");
+      }
+    } else {
+      alert("Datos inválidos.");
+    }
+  };
+
+  // Delete Category
+  const deleteSizes = async (id) => {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(
+      `https://api-koi-production.up.railway.app/api/talla/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      fetchSizes(); // Refrescar lista de Tallas
+    } else {
+      alert("Error al eliminar la categoría.");
+    }
+  };
   return (
     <div className="admin-profile-container">
       <h1 className="title">MI PERFIL</h1>
@@ -474,12 +557,23 @@ const AdminProfile = () => {
           <h2 className="title">TALLAS</h2>
           <div className="section">
             <div className="sizes">
-              {["S", "M", "L", "XL"].map((size) => (
-                <span key={size} className="size">
-                  {size}
+              {sizes.map((size) => (
+                <div key={size.id} className="size-container">
+                <span  className="size">
+                  {size.nombre}
                 </span>
+                <button className="btn-update" onClick={() => updateSizes(size.id)}>
+                    ✏️
+                  </button>
+                  <button className="btn-delete" onClick={() => deleteSizes(size.id)}>
+                    🗑️
+                  </button>
+                </div>
               ))}
             </div>
+            <button className="add-btn" onClick={addSizes}>
+              Añadir Talla  ➕
+            </button>
           </div>
         </div>
       )}
