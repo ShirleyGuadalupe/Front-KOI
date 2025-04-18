@@ -9,7 +9,9 @@
     font-weight: bolder;
     padding: 2%;
 }
-
+.add-to-cart-button:hover {
+    background-color: rgb(128, 192, 252);
+}
 .size.selected {
     border: 2px solid black;
     /* Resalta la talla seleccionada */
