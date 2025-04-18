@@ -84,7 +84,6 @@ const HomePage = () => {
           <span>Entregas a todo el país Colombia</span>
         </div>
       </div>
-      <CatalogPage/>
     </div>
   );
 };

@@ -58,7 +58,7 @@ const CatalogPage = () => {
         {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
       </div>
       <div style={styles.links}>
-        <Link to="/lanzamientos" style={styles.link}>Ver más lanzamientos</Link>
+        {/*<Link to="/lanzamientos" style={styles.link}>Ver más lanzamientos</Link>*/}
       </div>
       {/* Productos de Ofertas */}
       <h2 style={styles.subTitle}>OFERTAS</h2>
@@ -76,7 +76,7 @@ const CatalogPage = () => {
 
       {/* Enlaces para ver más productos */}
       <div style={styles.links}>
-        <Link to="/ofertas" style={styles.link}>Ver más ofertas</Link>
+        {/*<Link to="/ofertas" style={styles.link}>Ver más ofertas</Link>*/}
       </div>
       {/* Productos de Ofertas */}
       <h2 style={styles.subTitle}>TODOS NUESTROS PRODUCTOS</h2>
@@ -97,17 +97,23 @@ const CatalogPage = () => {
 
 const styles = {
   container: {
+    backgroundColor: "rgb(232, 233, 219)",
+    alignSelf: "Center",
     padding: "16px",
-    background: "#f9f9f9",
-  },
+    },
   title: {
-    fontSize: "24px",
-    marginBottom: "16px",
+    alignSelf: "Center",
+    fontSize: "28px",
+    marginBottom: "20px",
   },
   subTitle: {
-    fontSize: "20px",
-    marginTop: "32px",
-    marginBottom: "16px",
+    backgroundColor: "rgb(247, 247, 247)",
+    borderRadius: "10px",
+    padding: "15px",
+    fontSize: "18px",
+    marginTop: "30px",
+    alignSelf: "Center",
+    
   },
   grid: {
     display: "flex",
@@ -115,11 +121,12 @@ const styles = {
     flexWrap: "wrap",
   },
   links: {
+    color: "#c60000",
     marginTop: "32px",
   },
   link: {
     marginRight: "16px",
-    color: "#007BFF",
+    color: "#c60000",
     textDecoration: "none",
   },
   addButton: {

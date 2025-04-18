@@ -1,6 +1,7 @@
 /* General Styles */
 body {
   font-family: "Verdana";
+  background-color: #350d0d;
 }
 
 .top-bar {
@@ -41,9 +42,18 @@ a.btn-bar {
 }
 
 a.btn-bar-login {
-  background-color: rgb(212, 0, 0);
+  background-color: rgb(185, 0, 0);
 }
 
+a.btn-bar:hover {
+  color:#000;
+  background-color: rgb(149, 149, 149);
+}
+
+a.btn-bar-login:hover {
+  color:#000;
+  background-color: rgb(234, 105, 105);
+}
 /* Header Container */
 .header-container {
   display: flex;
@@ -108,7 +118,7 @@ a.letters {
 .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: #fff;
+  background-color: #ffffff;
   color: #000;
   padding: 10px;
   list-style: none;
@@ -125,7 +135,7 @@ a.letters {
   position: absolute;
   top: 0;
   left: 100%;
-  background-color: #fff;
+  background-color: #eae8e8;
   color: #000;
   padding: 10px;
   list-style: none;
@@ -147,5 +157,6 @@ a.letters {
 
 .collection-link:hover,
 .subcollection-link:hover {
-  background-color: #f0f0f0;
+  background-color: #e6c5c5;
+  border-radius: 7px;
 }
