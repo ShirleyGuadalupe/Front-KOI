@@ -58,7 +58,7 @@ const AddProductForm = () => {
     <div style={styles.container}>
       <h1 style={styles.title}>Añadir Producto</h1>
       <form onSubmit={handleSubmit} style={styles.form}>
-        {/* <div style={styles.imageUpload}>
+        <div style={styles.imageUpload}>
           <label style={styles.imageLabel}>
             {product.image ? (
               <img src={product.image} alt="Preview" style={styles.imagePreview} />
@@ -75,7 +75,7 @@ const AddProductForm = () => {
               style={styles.fileInput}
             />
           </label>
-        </div> */}
+        </div>
 
         <input
           type="text"
@@ -133,14 +133,19 @@ const AddProductForm = () => {
 
 const styles = {
   container: {
-    padding: "20px",
-    maxWidth: "600px",
-    margin: "0 auto",
+    backgroundColor:"rgb(234, 234, 220)",
+    padding: "40px",
+    maxWidth: "500px",
+    margin: "30px auto",
   },
   title: {
-    fontSize: "24px",
+    backgroundColor:"black",
+    padding:"10px",
+    color:"white",
+    fontSize: "20px",
     textAlign: "center",
     marginBottom: "20px",
+    borderRadius:"10px",
   },
   form: {
     display: "flex",
@@ -162,6 +167,7 @@ const styles = {
     width: "200px",
     height: "200px",
     justifyContent: "center",
+    fontSize:"14px",
   },
   addIcon: {
     fontSize: "24px",

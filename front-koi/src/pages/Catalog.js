@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const CatalogPage = () => {
   const [launchProducts, setLaunchProducts] = useState([]);
@@ -55,7 +56,7 @@ const CatalogPage = () => {
         ) : (
           <div>No hay productos de lanzamiento disponibles.</div>
         )}
-        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
+        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕</a>):(<></>)}
       </div>
       <div style={styles.links}>
         {/*<Link to="/lanzamientos" style={styles.link}>Ver más lanzamientos</Link>*/}
@@ -70,7 +71,7 @@ const CatalogPage = () => {
         ) : (
           <div>No hay productos de oferta disponibles.</div>
         )}
-        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
+        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕</a>):(<></>)}
         
       </div>
 
@@ -88,7 +89,7 @@ const CatalogPage = () => {
         ) : (
           <div>No hay productos de oferta disponibles.</div>
         )}
-        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕ Añadir productos</a>):(<></>)}
+        {isAdmin === "true"?(<a class="btn" style={styles.addButton} href="/adding-product">➕</a>):(<></>)}
         
       </div>
     </div>
@@ -130,12 +131,13 @@ const styles = {
     textDecoration: "none",
   },
   addButton: {
-    padding: "10px 16px",
-    backgroundColor: "#e0e0e0",
+    padding: "130px 87px",
+    margin: "10px",
+    backgroundColor: "rgb(246, 246, 246)",
     border: "none",
     borderRadius: "8px",
     cursor: "pointer",
-    alignSelf: "center",
+    alignSelf: "center"
   },
 };
 
