@@ -182,7 +182,7 @@ const Product = () => {
             </div>
 
             {/* Información del producto */}
-            <div style={styles.infoSection }>
+            <div style={styles.infoSection } className="Info">
                 <h1 style={styles.title} id="titulo">{product.nombre}</h1>
 
                 {/* Selección de tipo de camiseta */}
@@ -266,16 +266,26 @@ const styles = {
         gap: "20px",
         padding: "20px",
         fontFamily: "Arial, sans-serif",
+        flexWrap: "wrap"
     },
     imageSection: {
-        flex: 1,
+        flex: "0 0 60%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
     },
+    infoSection: {
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        paddingTop: "20px",
+        backgroundColor: "rgb(219, 219, 219)",
+        padding:"4vh",
+    },
     mainImage: {
         width: "100%",
-        maxWidth: "650px",
+        maxWidth: "80vh",
         borderRadius: "10px",
     },
     thumbnailContainer: {
@@ -294,13 +304,7 @@ const styles = {
         color: "red",
         fontWeight: "bold",
     },
-    infoSection: {
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        paddingTop: "20px",
-    },
+    
     title: {
         fontSize: "28px",
         fontWeight: "bold",

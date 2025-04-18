@@ -677,6 +677,7 @@ const styles = {
         padding: '20px',
         borderRadius: '8px',
         boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+        backgroundColor: "rgb(255, 255, 255)"
     },
     colorList: {
         display: 'flex',
@@ -704,6 +705,7 @@ const styles = {
         alignItems: 'center',
         gap: '40px',
         padding: '20px',
+        
     },
     form: {
         display: 'flex',
@@ -715,6 +717,7 @@ const styles = {
         maxWidth: '500px',
         width: '100%',
         borderTop: "1px solid #ddd",
+        backgroundColor: "rgb(255, 255, 255)"
     },
     imagesSection: {
         display: 'flex',
