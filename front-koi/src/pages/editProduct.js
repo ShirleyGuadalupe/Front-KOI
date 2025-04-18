@@ -12,7 +12,6 @@ const EditProduct = () => {
         oferta: false,
         subColeccionId: 1,
     });
-
     const [subcolecciones, setSubcolecciones] = useState([]);
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -22,6 +21,13 @@ const EditProduct = () => {
     const [message, setMessage] = useState('');
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    //tipos y tallas
+    const [tallas, setTallas] = useState([]); // Tallas asociados a la camiseta
+    const [allTallas, setAllTallas] = useState([]);
+    const [selectedTalla, setSelectedTalla] = useState(null);
+    const [tipos, setTipos] = useState([]); // Tipos asociados a la camiseta
+    const [allTipos, setAllTipos] = useState([]);
+    const [selectedTipo, setSelectedTipo] = useState(null);
 
     // Función para manejar cuando el mouse entra en una imagen
     const handleMouseEnter = (index) => {
@@ -80,6 +86,47 @@ const EditProduct = () => {
             .catch((error) => {
                 console.error('Error al obtener colores disponibles:', error);
             });
+
+        // Obtener tallas asociados a la camiseta
+        fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}/tallas/`)
+            .then((response) => response.json())
+            .then((data) => {
+                setTallas(data); // Tallas asociados a la camiseta
+            })
+            .catch((error) => {
+                console.error('Error al obtener tallas asociados:', error);
+                setTallas([]);
+            });
+
+        // Obtener todos las Tallas disponibles
+        fetch('https://api-koi-production.up.railway.app/api/talla/')
+            .then((response) => response.json())
+            .then((data) => {
+                setAllTallas(data); // Tallas disponibles en la base de datos
+            })
+            .catch((error) => {
+                console.error('Error al obtener tallas disponibles:', error);
+            });
+        // Obtener tipos asociados a la camiseta
+        fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}/tipos/`)
+            .then((response) => response.json())
+            .then((data) => {
+                setTipos(data); // Tipos asociados a la camiseta
+            })
+            .catch((error) => {
+                console.error('Error al obtener tipos asociados:', error);
+                setTipos([]);
+            });
+
+        // Obtener todos las tipos disponibles
+        fetch('https://api-koi-production.up.railway.app/api/tipo/')
+            .then((response) => response.json())
+            .then((data) => {
+                setAllTipos(data); // tipos disponibles en la base de datos
+            })
+            .catch((error) => {
+                console.error('Error al obtener tipos disponibles:', error);
+            });
     }, [id]);
     // Función para agregar un color a la camiseta
     const handleAddColor = () => {
@@ -110,6 +157,114 @@ const EditProduct = () => {
             .catch((error) => {
                 console.error('Error al agregar el color:', error);
             });
+    };
+    const handleAddTalla = () => {
+        if (!selectedTalla) {
+            console.error('Por favor, selecciona talla');
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}/tallas/${selectedTalla}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setTallas((prevTallas) => [...prevTallas, data]); // 'data' debe contener la nueva talla
+                window.location.reload();
+                setMessage('Talla añadida correctamente');
+                setIsPopupVisible(true);
+                setTimeout(() => {
+                    setIsPopupVisible(false);
+                }, 3000);
+            })
+            .catch((error) => {
+                console.error('Error al agregar la talla:', error);
+            });
+    };
+    const handleDeleteTalla = async (Tallaid) => {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+            `https://api-koi-production.up.railway.app/api/camisetas/${id}/tallas/${Tallaid}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        if (response.ok) {
+            // Refrescar lista de Tallas
+
+            setMessage('Talla Eliminada correctamente');
+            setIsPopupVisible(true);
+            setTimeout(() => {
+                setIsPopupVisible(false);
+            }, 3000);
+            window.location.reload();
+        } else {
+            alert("Error al eliminar la talla.");
+        }
+    };
+    const handleAddTipo = () => {
+        if (!selectedTipo) {
+            console.error('Por favor, selecciona un tipo de producto');
+            return;
+        }
+
+        const token = localStorage.getItem('token');
+        fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}/tipos/${selectedTipo}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setTipos((prevTipos) => [...prevTipos, data]); // 'data' debe contener el nuevo tipo de producto
+                window.location.reload();
+                setMessage('Tipo de producto añadido correctamente');
+                setIsPopupVisible(true);
+                setTimeout(() => {
+                    setIsPopupVisible(false);
+                }, 3000);
+            })
+            .catch((error) => {
+                console.error('Error al agregar el tipo de producto:', error);
+            });
+    };
+
+    const handleDeleteTipo = async (tipoId) => {
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(
+            `https://api-koi-production.up.railway.app/api/camisetas/${id}/tipos/${tipoId}`,
+            {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        if (response.ok) {
+            window.location.reload();
+            // Refrescar lista de Tipos de Producto
+            setMessage('Tipo de producto eliminado correctamente');
+            setIsPopupVisible(true);
+            setTimeout(() => {
+                setIsPopupVisible(false);
+            }, 3000);
+        } else {
+            alert("Error al eliminar el tipo de producto.");
+        }
     };
     const handleProductChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -343,7 +498,7 @@ const EditProduct = () => {
                                                 src="https://i.ibb.co/zFjn8wQ/boton-x-1.png"
                                                 alt="Close"
                                                 style={styles.closeIcon}
-                                                onClick={ () =>deleteImage(image.id)}
+                                                onClick={() => deleteImage(image.id)}
                                             />
                                         </div>
                                     )}
@@ -414,6 +569,95 @@ const EditProduct = () => {
                     Agregar Color
                 </button>
                 <Link to="/profile" >Crear Colores</Link>
+            </div>
+            {/* Tallas */}
+            <div style={styles.colorsSection}>
+                <h2>Tallas</h2>
+
+                {/* Mostrar Tallas asociados a la camiseta */}
+                <div>
+                    {tallas.length === 0 ? (
+                        <p>No hay Tallas asociados</p>
+                    ) : (
+                        tallas.map((talla) => (
+                            <div key={talla.id} className="size-container" >
+                                <span className="size" style={styles.size}>
+                                    {talla.nombre}
+                                </span>
+                                <button className="btn-delete" onClick={() => handleDeleteTalla(talla.id)}>
+                                    🗑️
+                                </button>
+                            </div>
+                        ))
+                    )}
+                </div>
+
+                {/* Dropdown para seleccionar una nueva Talla */}
+
+                <div style={styles.selectGroup}>
+                    <label style={styles.label}>Seleccionar Talla</label>
+                    <select
+                        value={selectedTalla || ''}
+                        onChange={(e) => setSelectedTalla(e.target.value)}
+                        style={styles.selectInput}
+                    >
+                        <option value="">Seleccione una talla</option>
+                        {allTallas.map((talla) => (
+                            <option key={talla.id} value={talla.id}>
+                                {talla.nombre}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <button onClick={handleAddTalla} style={styles.submitButton}>
+                    Agregar Talla
+                </button>
+                <Link to="/profile" >Crear Tallas</Link>
+            </div>
+            {/* Tipos de Producto */}
+            <div style={styles.colorsSection}>
+                <h2>Tipos de Producto</h2>
+
+                {/* Mostrar Tipos de Producto asociados */}
+                <div>
+                    {tipos.length === 0 ? (
+                        <p>No hay Tipos de Producto asociados</p>
+                    ) : (
+                        tipos.map((tipo) => (
+                            <div key={tipo.id} className="size-container">
+                                <span className="size" style={styles.size}>
+                                    {tipo.nombre} - {tipo.precio}
+                                </span>
+                                <button className="btn-delete" onClick={() => handleDeleteTipo(tipo.id)}>
+                                    🗑️
+                                </button>
+                            </div>
+                        ))
+                    )}
+                </div>
+
+                {/* Dropdown para seleccionar un nuevo Tipo de Producto */}
+                <div style={styles.selectGroup}>
+                    <label style={styles.label}>Seleccionar Tipo de Producto</label>
+                    <select
+                        value={selectedTipo || ''}
+                        onChange={(e) => setSelectedTipo(e.target.value)}
+                        style={styles.selectInput}
+                    >
+                        <option value="">Seleccione un tipo de producto</option>
+                        {allTipos.map((tipo) => (
+                            <option key={tipo.id} value={tipo.id}>
+                                {tipo.nombre}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <button onClick={handleAddTipo} style={styles.submitButton}>
+                    Agregar Tipo de Producto
+                </button>
+                <Link to="/profile">Crear Tipos de Producto</Link>
             </div>
             {isPopupVisible && (
                 <div className="popup">
@@ -488,7 +732,7 @@ const styles = {
         width: '150px',
         height: '150px',
         overflow: 'hidden',
-        position:"relative",
+        position: "relative",
     },
     input: {
         padding: '10px',
@@ -580,11 +824,24 @@ const styles = {
         left: '2px',
         cursor: 'pointer',
         zIndex: 1000,
-      },
-      closeIcon: {
+    },
+    closeIcon: {
         width: '15px',
         height: '15px',
-      },
+    },
+    size: {
+        display: 'inline-block',
+        padding: '10px 15px',
+        margin: '5px',
+        backgroundColor: '#ddd',
+        borderRadius: '5px',
+        fontSize: '14px',
+        color: '#555',
+    },
+    sizeHover: {
+        backgroundColor: '#ccc',
+        cursor: 'pointer',
+    },
 };
 
 export default EditProduct;

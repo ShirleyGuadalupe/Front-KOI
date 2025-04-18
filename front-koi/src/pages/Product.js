@@ -12,6 +12,7 @@ const Product = () => {
     const [selectedType, setSelectedType] = useState(null);
     const [colors, setColors] = useState([]);
     const [selectedColor, setSelectedColor] = useState(null);
+    const [sizes, setSizes] = useState([]);
     const [selectedSize, setSelectedSize] = useState(null);
     const [quantity, setQuantity] = useState(1);
     const [message, setMessage] = useState('');
@@ -43,7 +44,7 @@ const Product = () => {
 
         const fetchTypes = async () => {
             try {
-                const response = await fetch(`https://api-koi-production.up.railway.app/api/tipo`);
+                const response = await fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}/tipos`);
                 const data = await response.json();
                 setTypes(data);
                 setSelectedType(data[0]?.id); // Seleccionar el primer tipo por defecto
@@ -62,11 +63,21 @@ const Product = () => {
                 console.error("Error al obtener los colores:", error);
             }
         };
-
+        const fetchSizes= async () => {
+            try {
+                const response = await fetch(`https://api-koi-production.up.railway.app/api/camisetas/${id}/tallas`);
+                const data = await response.json();
+                setSizes(data);
+                setSelectedSize(data[0]?.id); // Seleccionar el primer tipo por defecto
+            } catch (error) {
+                console.error("Error al obtener las tallas de producto:", error);
+            }
+        };
         fetchProduct();
         fetchImages();
         fetchTypes();
         fetchColors();
+        fetchSizes();
     }, [id]);
 
     if (loading) {
@@ -171,7 +182,7 @@ const Product = () => {
             </div>
 
             {/* Información del producto */}
-            <div style={styles.infoSection}>
+            <div style={styles.infoSection }>
                 <h1 style={styles.title} id="titulo">{product.nombre}</h1>
 
                 {/* Selección de tipo de camiseta */}
@@ -214,13 +225,13 @@ const Product = () => {
                 <div className="section">
                     <h2>Tallas</h2>
                     <div className="sizes">
-                        {["S", "M", "L", "XL"].map((size) => (
+                        {sizes.map((size) => (
                             <span
-                                key={size}
-                                className={`size ${selectedSize === size ? "selected" : ""}`}
-                                onClick={() => setSelectedSize(size)}
+                                key={size.id}
+                                className={`size ${selectedSize === size.nombre ? "selected" : ""}`}
+                                onClick={() => setSelectedSize(size.nombre)}
                             >
-                                {size}
+                                {size.nombre}
                             </span>
                         ))}
                     </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/Header.css";
 
 const handleLogout = () => {
-  localStorage.removeItem("token");
+  localStorage.clear();
 };
 
 const Header = () => {
