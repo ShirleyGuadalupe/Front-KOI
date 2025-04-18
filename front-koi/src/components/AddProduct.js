@@ -48,17 +48,11 @@ const AddProductForm = () => {
     }
   };
 
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setProduct({ ...product, image: URL.createObjectURL(file) });
-  };
-
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Añadir Producto</h1>
       <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.imageUpload}>
+        {/* <div style={styles.imageUpload}>
           <label style={styles.imageLabel}>
             {product.image ? (
               <img src={product.image} alt="Preview" style={styles.imagePreview} />
@@ -71,11 +65,11 @@ const AddProductForm = () => {
             <input
               type="file"
               accept="image/*"
-              onChange={handleImageChange}
+              // onChange={handleImageChange}
               style={styles.fileInput}
             />
           </label>
-        </div>
+        </div> */}
 
         <input
           type="text"
@@ -124,7 +118,7 @@ const AddProductForm = () => {
           </label>
         </div>
         <button type="submit" style={styles.submitButton}>
-          Agregar Camisa
+          Agregar Producto
         </button>
       </form>
     </div>

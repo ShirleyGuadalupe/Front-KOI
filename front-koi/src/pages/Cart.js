@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Product.css";
+import "../styles/cart.css";
 const Cart = () => {
     const [cart, setCart] = useState(null); // Datos del carrito
     const [loading, setLoading] = useState(true); // Indicador de carga
@@ -146,7 +147,7 @@ const Cart = () => {
             <h1 style={styles.title} id="titulo">TU CARRITO DE COMPRAS</h1>
 
             {/* Lista de productos */}
-            <div style={styles.itemsContainer}>
+            <div style={styles.itemsContainer} className="container">
                 {cart.items.map((item) => (
                     <div key={item.id} style={styles.item}>
                         {/* Imagen del producto */}
@@ -159,7 +160,7 @@ const Cart = () => {
                         </div>
 
                         {/* Detalles del producto */}
-                        <div style={styles.itemDetails}>
+                        <div style={styles.itemDetails} className="details">
                             <h2 style={styles.itemName}>{item.nombre}</h2>
                             <p>TIPO DE CAMISA: {tipoCamisaMap[item.tipoCamisaId] || "Cargando..."}</p>
                             <p>TALLA: {item.talla}</p>
@@ -180,11 +181,7 @@ const Cart = () => {
                                     onClick={() => deleteItem(item.id)}
                                     title="Eliminar producto"
                                 >
-                                    <img
-                                        src="https://i.ibb.co/qNT5fZ0/close-icon.png"
-                                        alt="Eliminar"
-                                        style={styles.deleteButtonImage}
-                                    />
+                                    Eliminar
                                 </button>
                             </div>
                         </div>
@@ -208,11 +205,12 @@ const Cart = () => {
 
 const styles = {
     container: {
-        backgroundColor:"#cdcdcd",
+        backgroundColor:"rgb(235, 234, 234)",
         maxWidth: "800px",
         margin:"auto",
         marginTop: "40px",
         alignItems:"center",
+        // textAlign: "center"
     },
     title: {
         fontSize: "20px",
@@ -222,12 +220,12 @@ const styles = {
     },
     itemsContainer: {
         marginBottom: "20px",
-        alignItems: "center"
+        alignItems: "center",
+        flexDirection: "column"
     },
     item: {
         display: "flex",
         alignItems: "center",
-        
         padding: "10px 0",
     },
     imageContainer: {
@@ -295,7 +293,7 @@ const styles = {
     },
     deleteButton: {
         padding: "10px",
-        backgroundColor: "red",
+        backgroundColor: "rgb(231, 89, 89)",
         color: "white",
         border: "none",
         borderRadius: "8px",

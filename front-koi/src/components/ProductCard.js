@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importamos useNavigate
-
+import "../styles/productCard.css";
 const ProductCard = ({ product, onDelete }) => {
   const [image, setImage] = useState(null); // Estado para almacenar la primera imagen
   const navigate = useNavigate(); // Usamos el hook useNavigate para la navegación
@@ -54,16 +54,17 @@ const ProductCard = ({ product, onDelete }) => {
   };
 
   return (
-    <div style={styles.card} >
-      {/* Si hay una imagen, la mostramos */}
-      {image ? (
-        <img src={image} alt={product.name} style={styles.image} onClick={redirigir}/>
-      ) : (
-        <div style={styles.imagePlaceholder}>Imagen no disponible</div> // Si no hay imagen, mostramos un mensaje de placeholder
-      )}
+    <div style={styles.card}  className="card">
       <div style={styles.details}>
         <h3 style={styles.title}>{product.nombre}</h3> {/* Asumiendo que 'name' es el nombre del producto */}
       </div>
+      {/* Si hay una imagen, la mostramos */}
+      {image ? (
+        <img src={image} alt={product.name} style={styles.image} onClick={redirigir} className="imagen"/>
+      ) : (
+        <div style={styles.imagePlaceholder}>Imagen no disponible</div> // Si no hay imagen, mostramos un mensaje de placeholder
+      )}
+      
       { isAdmin ==="true" ? (
       <div style={styles.actions}>
         {/* Botón de editar: navega a la página de edición */}
@@ -97,8 +98,7 @@ const styles = {
     flexDirection: "column",
     backgroundColor: "#fff",
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    maxWidth: "200px",
-    
+    maxWidth: "40vh",
   },
   image: {
     width:"100%",
