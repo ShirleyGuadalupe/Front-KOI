@@ -188,7 +188,7 @@ const Product = () => {
                 {/* Selección de tipo de camiseta */}
                 <div style={styles.formGroup}>
                     <label htmlFor="type" style={styles.label}>
-                        Tipo de Camiseta:
+                        Tipo de Producto:
                     </label>
                     <select
                         id="type"

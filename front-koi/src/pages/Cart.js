@@ -162,7 +162,7 @@ const Cart = () => {
                         {/* Detalles del producto */}
                         <div style={styles.itemDetails} className="details">
                             <h2 style={styles.itemName}>{item.nombre}</h2>
-                            <p>TIPO DE CAMISA: {tipoCamisaMap[item.tipoCamisaId] || "Cargando..."}</p>
+                            <p>TIPO DE Producto: {tipoCamisaMap[item.tipoCamisaId] || "Cargando..."}</p>
                             <p>TALLA: {item.talla}</p>
                             <div style={styles.colorContainer}>
                                 <p>COLOR:</p>
